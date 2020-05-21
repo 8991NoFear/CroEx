@@ -1,0 +1,88 @@
+@media (max-width: 576px) {
+    h1.display-3 {
+        font-size: 48px;
+    }
+}
+
+#banner {
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(274deg, #46c8d0, #6262e2 44%, #c962f7);
+  color: #fff;
+}
+
+#banner .content-wrap {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  left: 50%;
+}
+
+#offer {
+    background-color: #e9ecef;
+}
+
+.offer-box {
+  position: relative;
+  overflow: hidden;
+  perspective: 1000px;
+  height: 220px;
+}
+
+.offer-front {
+  width: 100%;
+  height: 220px;
+  transition: all .5s ease;
+  background-color: #02ccba;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.offer-behind {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+  width: 100%;
+  height: 220px;
+  transition: all .5s ease;
+  background-color: #02b3e4;
+  transform-style: preserve-3d;
+  transform: translateY(110px) rotateX(-90deg);
+  display: flex;
+  align-items: center;
+}
+
+.offer-box:hover .offer-front {
+  opacity: 0;
+  transform: translateY(-110px) rotateX(90deg);
+}
+
+.offer-box:hover .offer-behind  {
+  opacity: 1;
+  transform: rotateX(0);
+}
+
+img.custom-rounded {
+  /* border-radius: 50%; */
+  max-width: 100%;
+}
+
+#testimonial {
+    background-color: #e9ecef;
+}
+
+.card-img-top {
+    border-radius: 50%;
+}
+
+.carousel-indicators li {
+    margin: 8px;
+    background-color: #02ccba;
+}
+.carousel-indicators .active {
+    background-color: #000;
+}
