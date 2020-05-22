@@ -6,12 +6,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
-    use Notifiable;
+    // use Notifiable;
 
-    protected $table = 'users';
-
+    protected $table = 'admins';
     /**
      * The attributes that are mass assignable.
      *
@@ -38,4 +37,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // @author: ledinhbinh
+    protected $guard = 'admin';
+    //
 }

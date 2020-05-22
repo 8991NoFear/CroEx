@@ -4,6 +4,9 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+// @author: ledinhbinh
+use Illuminate\Auth\AuthenticationException;
+//
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +49,26 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // dd($exception);
+        // @author: ledinhbinh
+        if ($exception instanceof AuthenticationException) {
+            $guard = array_get($exception->guards(), 0);
+            switch ($guard) {
+                case 'admin':
+                    return redirect()->route('admin.login');
+                    break;
+
+                case 'parner':
+                    return redirect()->route('parner.login');
+                    break;
+
+                default:
+                    return redirect()->route('login');
+                    break;
+            }
+        }
+
+        // dd($exception);
         return parent::render($request, $exception);
     }
 }

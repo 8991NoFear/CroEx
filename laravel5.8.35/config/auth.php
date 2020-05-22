@@ -41,6 +41,18 @@ return [
             'provider' => 'users',
         ],
 
+        // @author: ledinhbinh
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'parner' => [
+            'driver' => 'session',
+            'provider' => 'parners',
+        ],
+        //
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -71,6 +83,18 @@ return [
             'model' => App\User::class,
         ],
 
+        // @author: ledinhbinh
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+
+        'parners' => [
+            'driver' => 'eloquent',
+            'model' => App\Parner::class,
+        ],
+        //
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -95,6 +119,18 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'parners' => [
+            'provider' => 'parners',
             'table' => 'password_resets',
             'expire' => 60,
         ],

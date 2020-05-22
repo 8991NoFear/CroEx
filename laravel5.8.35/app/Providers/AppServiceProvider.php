@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+// @author: ledinhbinh
+use Illuminate\Database\Schema\Builder; // Import Builder
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,8 +23,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        //
-    }
+     // @author: ledinhbinh
+      public function boot()
+      {
+          Builder::defaultStringLength(191); // Update defaultStringLength
+      }
 }
