@@ -30,7 +30,7 @@ class ParnerLoginController extends Controller
         $this->validate($request,
             [
                 'email' => ['required', 'email'],
-                'password' => ['required', 'string', 'min:6'],
+                'password' => ['required', 'string'],
             ]);
 
         // attempt to log user in

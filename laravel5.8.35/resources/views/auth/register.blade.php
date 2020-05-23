@@ -5,7 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header d-flex justify-content-between">
+                    <div class="">
+                        Login
+                    </div>
+                    <div>
+                        <a href="{{route('login')}}">Already have an account? Login</a>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
