@@ -25,15 +25,15 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             switch ($guard) {
                 case 'admin':
-                    return redirect()->route('admins.dashboard');
+                    return redirect()->route('admin.dashboard');
                     break;
 
                 case 'parner':
-                    return redirect()->route('parners.dashboard');
+                    return redirect()->route('parner.dashboard');
                     break;
 
                 default:
-                    return redirect()->route('home');
+                    return redirect()->route('user.dashboard');
                     break;
             }
         }
