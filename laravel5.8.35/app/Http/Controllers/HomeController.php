@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Parner;
 
 
 class HomeController extends Controller
@@ -15,23 +16,12 @@ class HomeController extends Controller
 
     public function index()
     {
-        $actor = $this->getCurrentUser();
+        $user = Auth::guard()->user();
+        $parners = Parner::all();
         return view('welcome', [
-            'actor' => $actor,
+            'user' => $user,
+            'parners' => $parners,
         ]);
-    }
-
-    public function getCurrentUser()
-    {
-        if (Auth::guard()->check()) {
-            return Auth::guard()->user();
-        } elseif (Auth::guard('admin')->check()) {
-            return Auth::guard('admin')->user();
-        } elseif (Auth::guard('parner')->check()) {
-            return Auth::guard('parner')->user();
-        } else {
-            return null;
-        }
     }
 
 }

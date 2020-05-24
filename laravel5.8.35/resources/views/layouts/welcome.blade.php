@@ -59,7 +59,7 @@
                 @if (Auth::guard('web')->check())
                 <li class="nav-item dropdown pl-3 border-left">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">
-                        {{ $actor->name}}
+                        {{ $user->name}}
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow">
@@ -78,30 +78,9 @@
                         </a>
                     </div>
                 </li>
-
-                @elseif (Auth::guard('parner')->check())
-                <li class="nav-item dropdown pl-3 border-left">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">
-                        {{ $actor->name}}
-                    </a>
-                    <!-- Dropdown - User Information -->
-                    <div class="dropdown-menu dropdown-menu-right shadow">
-                        <a class="dropdown-item" href="{{ route('parner.edit')}}">
-                            Profile
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            User Log
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                            Logout
-                        </a>
-                    </div>
-                </li>
-
                 @else
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">login</a>
+                    <a class="nav-link" href="{{route('login')}}">login</a>
                 </li>
                 @endif
             </ul>
@@ -119,16 +98,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="
-                    @php
-                        if (Auth::guard('web')->check()) {
-                            echo route('logout');
-                        } elseif (Auth::guard('parner')->check()) {
-                            echo route('parner.logout');
-                        } elseif (Auth::guard('admin')->check()) {
-                            echo route('admin.logout');
-                        }
-                    @endphp">
+                    <a class="btn btn-primary" href="route('logout')">
                         Logout
                     </a>
                 </div>

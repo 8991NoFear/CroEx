@@ -111,23 +111,14 @@
         </div>
         <div class="row mt-5 justify-content-center">
 
-            <div class="col-sm-2 col-6 mb-3">
-                <img class="custom-rounded" src="<?php echo asset('storage/parners/fpt.jpg'); ?>" alt="no image loaded">
-            </div>
+            @foreach ($parners as $parner)
+                <div class="col-sm-2 col-6 mb-3">
+                    <img class="custom-rounded" src="/storage/{{ $parner->avatar }}" alt="no image loaded">
+                </div>
+            @endforeach
 
-            <div class="col-sm-2 col-6 mb-3">
-                <img class="custom-rounded" src="<?php echo asset('storage/parners/garena.jpg'); ?>" alt="no image loaded">
-            </div>
-
-            <div class="col-sm-2 col-6 mb-3">
-                <img class="custom-rounded" src="<?php echo asset('storage/parners/gongcha.png'); ?>" alt="no image loaded">
-            </div>
-
-            <div class="col-sm-2 col-6 mb-3">
-                <img class="custom-rounded" src="<?php echo asset('storage/parners/tocotoco.jpg'); ?>" alt="no image loaded">
-            </div>
         </div>
-        <a class="btn btn-primary mt-5" href="#">Become Our Parner</a>
+        <a class="btn btn-primary mt-5" href="{{ route('parner.create') }}">Become Our Parner</a>
     </div>
 </section>
 

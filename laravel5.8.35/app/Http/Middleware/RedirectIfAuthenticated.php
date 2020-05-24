@@ -28,10 +28,6 @@ class RedirectIfAuthenticated
                     return redirect()->route('admin.dashboard');
                     break;
 
-                case 'parner':
-                    return redirect()->route('parner.dashboard');
-                    break;
-
                 default:
                     return redirect()->route('user.dashboard');
                     break;

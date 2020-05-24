@@ -80,11 +80,6 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('parner')->group(function () {
-    Route::get('login', 'Auth\ParnerLoginController@showLoginForm')->name('parner.login');
-    Route::post('login', 'Auth\ParnerLoginController@login')->name('parner.login.submit');
-    Route::get('logout', 'Auth\ParnerLoginController@logout')->name('parner.logout');
-
-    Route::get('edit', 'ParnerController@edit')->name('parner.edit');
-    Route::post('edit', 'ParnerController@edit@update')->name('parner.update');
-    Route::get('/', 'ParnerController@index')->name('parner.dashboard');
+    Route::get('create', 'ParnerController@create')->name('parner.create');
+    Route::post('create', 'ParnerController@store')->name('parner.store');
 });

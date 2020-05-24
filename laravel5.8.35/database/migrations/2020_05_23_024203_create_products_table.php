@@ -15,7 +15,6 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('category_id');
             $table->string('name', 191)->unique();
             $table->text('description')->nullable();
             $table->unsignedInteger('price');
@@ -23,8 +22,6 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('bonus_point')->default(0);
             $table->string('image', 191)->nullable();
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

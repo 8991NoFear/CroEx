@@ -58,10 +58,6 @@ class Handler extends ExceptionHandler
                     return redirect()->route('admin.login');
                     break;
 
-                case 'parner':
-                    return redirect()->route('parner.login');
-                    break;
-
                 default:
                     return redirect()->route('login');
                     break;
