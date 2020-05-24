@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 // Auth::routes();
 
@@ -77,6 +75,7 @@ Route::prefix('admin')->group(function () {
     Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
 });
 
@@ -84,5 +83,8 @@ Route::prefix('parner')->group(function () {
     Route::get('login', 'Auth\ParnerLoginController@showLoginForm')->name('parner.login');
     Route::post('login', 'Auth\ParnerLoginController@login')->name('parner.login.submit');
     Route::get('logout', 'Auth\ParnerLoginController@logout')->name('parner.logout');
+
+    Route::get('edit', 'ParnerController@edit')->name('parner.edit');
+    Route::post('edit', 'ParnerController@edit@update')->name('parner.update');
     Route::get('/', 'ParnerController@index')->name('parner.dashboard');
 });
