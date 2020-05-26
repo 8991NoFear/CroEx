@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Parner;
 use Illuminate\Support\Facades\DB;
 use App\ParnerUserTransaction;
+use App\Product;
+use App\ProductUserTransaction;
 
 class UserController extends Controller
 {
@@ -43,9 +45,10 @@ class UserController extends Controller
         ]);
 
         // check if user exists in parner
-        $parner = Parner::where('name', $data['parner'])->get()[0];
+        $parner = Parner::where('name', $data['parner'])->first();
         $user = Auth::guard()->user();
-        $parner_user = DB::table($parner->name)->where('email', $user->email)->get()[0];
+        $parner_user = DB::table($parner->name)->where('email', $user->email)->first();
+
         if (empty($parner_user)) {
             // redirect back with error
             return redirect()->back()->with('msg', 'you have not registered with that parner!');
@@ -78,6 +81,7 @@ class UserController extends Controller
             $parner_user->point -= $data['exchange_point'];
         }
 
+        // save in database
         $tran->save();
         $user->save();
         DB::table($parner->name)->where('email', $user->email)->update(['point' => $parner_user->point]);
@@ -144,4 +148,43 @@ class UserController extends Controller
         return redirect()->route('logout');
     }
 
+    public function showActivity()
+    {
+        $parner_user_tran = ParnerUserTransaction::all();
+        return view('activity', [
+            'transaction' => $parner_user_tran,
+        ]);
+    }
+
+    public function showCheckoutForm(Product $product)
+    {
+        return view('product.checkout', [
+            'product' => $product,
+            'user' => auth()->guard()->user();
+        ]);
+    }
+
+    public function checkout()
+    {
+        $data = $this->validate([
+            'product_id' => 'required',
+            'exchange_type' => 'boolean',
+        ]);
+
+        $product = Product::find($data['product_id']);
+        $user = auth()::guard()->user();
+        $product_user_transaction = new ProductUserTransaction;
+
+        $product_user_transaction->user_id = $user->id;
+        $product_user_transaction->product_id = $product->id;
+        $product_user_transaction->exchange_type = $data[exchange_type];
+        $product_user_transaction->exchange_point = 0;
+
+        if ($data[exchange_type] == 0) {
+            $user->point += $product->bonus_point;
+            $product_user_transaction->exchange_point = $product->bonus_point;
+        }
+
+        return view('thankyou');
+    }
 }

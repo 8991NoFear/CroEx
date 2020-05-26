@@ -38,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_user_transactions');
+    }
+
+    public function parners()
+    {
+        return $this->belongsToMany(Parner::class, 'parner_user_transactions');
+    }
 }

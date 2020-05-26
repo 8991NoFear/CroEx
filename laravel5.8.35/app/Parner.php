@@ -17,7 +17,7 @@ class Parner extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'avatar',
+        'name', 'avatar', 'email'
     ];
 
     /**
@@ -35,10 +35,15 @@ class Parner extends Authenticatable
      * @var array
      */
     protected $casts = [
-        
+
     ];
 
     // @author: ledinhbinh
     protected $guard = 'parner';
     //
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'parner_user_transactions');
+    }
 }

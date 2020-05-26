@@ -18,9 +18,9 @@ Route::get('/', 'HomeController@index')->name('home');
 // Route::get('/user', 'UserController@index')->name('user.dashboard');
 // Route::get('/user/edit', 'UserController@edit')->name('user.edit');
 
-Route::get('/test', function () {
-    return view('users.test');
-});
+Route::get('/products', 'HomeController@showAllProducts')->name('products');
+Route::get('/products/{product}', 'UserController@showCheckoutForm')->name('checkout');
+Route::post('/products', 'UserController@checkout')->name('checkout.submit');
 
 Route::prefix('user')->group(function () {
     //

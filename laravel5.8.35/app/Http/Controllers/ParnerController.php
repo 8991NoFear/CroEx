@@ -43,12 +43,14 @@ class ParnerController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'unique:parners'],
             'image' => ['required', 'image'],
+            'email' =>  ['required', 'email', 'unique:parners'],
         ]);
 
         // create a record
         Parner::create([
             'name' => $request->name,
             'avatar' => $request->image->store('parners', 'public'),
+            'email' => $request->email,
         ]);
 
         // create a user table for parner

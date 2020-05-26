@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use Illuminate\Http\Request;
+use App\Category;
 
 class AdminController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
 
     public function __construct()
     {
@@ -20,80 +16,60 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     public function index()
     {
-        return view('admins.admin');
+        // moi ngay co bao nhieu giao dich doi diem
+        $excTransPerDay = DB::table('parner_user_transactions')->select('create_at', DB:raw('count(*) as total'))->groupBy('create_at')->get();
+
+        // moi ngay co bao nhieu giao dich mua hang
+        $buyTransPerDay = DB::table('product_user_transactions')->select('create_at', DB:raw('count(*) as total'))->groupBy('create_at')->get();
+
+        // gui data thong ke duoc ra dashboard
+        return view('admins.admin', [
+            '$exTransPerDay' => $excTransPerDay,
+            '$buyTransPerDay' => $buyTransPerDay,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function showCreateCategoriesForm()
     {
-        //
+        return view('admins.category');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function createCategories()
     {
-        //
+        $data = $this->validate($request, [
+            'name' => 'required',
+            'image' => 'image',
+            'description' => '',
+        ]);
+
+        Category::create($data);
+
+        return redirect()->back->with('msg', 'create category successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Admin $admin)
+    public function showCreateProductForm()
     {
-        //
+        return view('admins.product');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Admin $admin)
+    public function createProduct()
     {
-        //
+        $data = $this->validate($request, [
+            'name' => 'required',
+            'image' => 'image',
+            'description' => '',
+            'price' => 'numeric',
+            'quantity' => 'numeric',
+            'bonus_point' => 'numeric',
+            'category_name' => ['string', 'unique:categories'],
+        ]);
+
+        Product::create($data);
+
+        return redirect()->back->with('msg', 'create product successfully!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Admin $admin)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Admin $admin)
-    {
-        //
-    }
 }
