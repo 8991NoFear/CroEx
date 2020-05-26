@@ -69,8 +69,8 @@
                         <a class="dropdown-item" href="#">
                             Activity Log
                         </a>
-                        <a class="dropdown-item" href="#">
-                            Parner
+                        <a class="dropdown-item" href="{{ route('user.exchange') }}">
+                            Exchange Point
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -98,7 +98,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="route('logout')">
+                    <a class="btn btn-primary" href="{{route('logout')}}">
                         Logout
                     </a>
                 </div>

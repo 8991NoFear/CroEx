@@ -5,7 +5,6 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card">
                 <form method="POST" action="{{ route('parner.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
@@ -57,7 +56,6 @@
                         </div>
                     </div>
                 </form>
-            </div>
         </div>
     </div>
 </div>

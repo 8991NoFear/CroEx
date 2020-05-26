@@ -33,6 +33,11 @@
             align-items: center;
             height: 100vh;
         }
+
+        .card {
+            -webkit-box-shadow: 8px 12px 18px 4px rgba(99,99,99,0.7);
+            box-shadow: 8px 12px 18px 4px rgba(99,99,99,0.7);
+        }
     </style>
 </head>
 <body>
