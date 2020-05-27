@@ -160,7 +160,7 @@ class UserController extends Controller
     {
         return view('product.checkout', [
             'product' => $product,
-            'user' => auth()->guard()->user();
+            'user' => auth()->guard()->user(),
         ]);
     }
 

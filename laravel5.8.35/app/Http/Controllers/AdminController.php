@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Admin;
 use Illuminate\Http\Request;
 use App\Category;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -18,16 +19,25 @@ class AdminController extends Controller
 
     public function index()
     {
-        // moi ngay co bao nhieu giao dich doi diem
-        $excTransPerDay = DB::table('parner_user_transactions')->select('create_at', DB:raw('count(*) as total'))->groupBy('create_at')->get();
+        // ngay hom nay ban duoc bao nhieu tien???
+        $todayArrFormat = array(date('Y-m-d'));
+        $moneyToday = DB::select('select sum(products.price) as total from products, product_user_transactions where products.id = product_user_transactions.product_id and date(product_user_transactions.created_at) = ?', $todayArrFormat)[0]->total;
 
-        // moi ngay co bao nhieu giao dich mua hang
-        $buyTransPerDay = DB::table('product_user_transactions')->select('create_at', DB:raw('count(*) as total'))->groupBy('create_at')->get();
+        // ngay hom nay co bao nhieu giao dich doi diem???
+        $exchangeToday = DB::select('select count(*) as total from parner_user_transactions where date(created_at) = ?', $todayArrFormat)[0]->total;
+
+        $orderToday = DB::select('select count(*) as total from product_user_transactions where date(created_at) = ?', $todayArrFormat)[0]->total;
+
+        $requestToday = DB::select('select count(*) as total from requests where date(created_at) = ?', $todayArrFormat)[0]->total;
+
+        // dd($moneyToday);
 
         // gui data thong ke duoc ra dashboard
         return view('admins.admin', [
-            '$exTransPerDay' => $excTransPerDay,
-            '$buyTransPerDay' => $buyTransPerDay,
+            'moneyToday' => $moneyToday,
+            'exchangeToday'=> $exchangeToday,
+            'orderToday' => $orderToday,
+            'requestToday'=> $requestToday,
         ]);
     }
 
