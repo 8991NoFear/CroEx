@@ -17,8 +17,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $user = Auth::guard()->user();
-        $parners = Parner::all();
+        $user       = Auth::guard('web')->user();
+        $parners    = Parner::all();
+        
         return view('welcome', [
             'user' => $user,
             'parners' => $parners,

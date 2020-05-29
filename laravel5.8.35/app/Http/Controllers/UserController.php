@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\ParnerUserTransaction;
 use App\Product;
 use App\ProductUserTransaction;
+use App\Events\ExchangePoint;
 
 class UserController extends Controller
 {
@@ -22,7 +23,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return redirect('/');
+        return redirect()->route('home');
     }
 
 
@@ -36,12 +37,17 @@ class UserController extends Controller
 
     public function submitExchange(Request $request)
     {
+        // discount
+        $discount = 0.05;
+
+        // notification message $ntfmsg
+        $ntfmsg = array();
 
         // validate data
         $data = $this->validate($request, [
-            'type_exchange' => ['required', 'boolean'],
-            'parner' => ['required', 'string'],
-            'exchange_point' => ['required', 'numeric']
+            'type_exchange'     => ['required', 'boolean'],
+            'parner'            => ['required', 'string'],
+            'exchange_point'    => ['required', 'numeric']
         ]);
 
         // check if user exists in parner
@@ -54,12 +60,13 @@ class UserController extends Controller
             return redirect()->back()->with('msg', 'you have not registered with that parner!');
         }
 
-        $tran = new ParnerUserTransaction;
-        $tran->user_id = $user->id;
-        $tran->parner_id = $parner->id;
-        $tran->parner_user_id = $parner_user->id;
-        $tran->exchange_type = $data['type_exchange'];
-        $tran->exchange_point = $data['exchange_point'];
+        $tran                   = new ParnerUserTransaction;
+        $tran->user_id          = $user->id;
+        $tran->parner_id        = $parner->id;
+        $tran->parner_user_id   = $parner_user->id;
+        $tran->exchange_type    = $data['type_exchange'];
+        $tran->exchange_point   = $data['exchange_point'];
+        $tran->discount         = $discount;
 
         // TH1: croex ==> parner
         if ($data['type_exchange'] == 0) {
@@ -67,9 +74,11 @@ class UserController extends Controller
                 return redirect()->back()->with('msg', 'your croex points is not enought!');
             }
 
-            $user->point -= $data['exchange_point'];
-            $parner_user->point += $data['exchange_point'];
+            $user->point            -= $data['exchange_point'];
+            $parner_user->point     += $tran->exchange_point * (1- $tran->discount);
 
+            $ntfmsg['point']         = $data['exchange_point'];
+            $ntfmsg['type']          = 0;
         }
         // TH2: parner ==> croex
         else {
@@ -77,14 +86,20 @@ class UserController extends Controller
                 return redirect()->back()->with('msg', 'your ' . $parner->name . ' point is not enought!');
             }
 
-            $user->point += $data['exchange_point'];
-            $parner_user->point -= $data['exchange_point'];
+            $user->point           += $tran->exchange_point * (1- $tran->discount);
+            $parner_user->point    -= $data['exchange_point'];
+
+            $ntfmsg['point']        = $tran->exchange_point * (1- $tran->discount);
+            $ntfmsg['type']         = 1;
         }
 
         // save in database
         $tran->save();
         $user->save();
         DB::table($parner->name)->where('email', $user->email)->update(['point' => $parner_user->point]);
+
+        // dispath event
+        ExchangePoint::dispatch($ntfmsg);
 
         return redirect()->back()->with('msg', 'exchange point successfully!');
     }
@@ -104,33 +119,33 @@ class UserController extends Controller
 
         // validate data
         $data = $request->validate([
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string', 'confirmed'],
-            'image' => '',
-            'review' => '',
+            'name'      => ['required', 'string'],
+            'email'     => ['required', 'email'],
+            'password'  => ['required', 'string', 'confirmed'],
+            'image'     => 'image',
+            'review'    => '',
         ]);
 
         $user->password = Hash::make($data['password']);
 
         if ($request->name !== $user->name) {
             $data = $request->validate([
-                'name' => ['unique:users'],
-                'email' => '',
-                'password' => '',
-                'image' => '',
-                'review' => '',
+                'name'      => ['unique:users'],
+                'email'     => '',
+                'password'  => '',
+                'image'     => '',
+                'review'    => '',
             ]);
             $user->name = $data['name'];
         }
 
         if ($request->email !== $user->email) {
             $data = $request->validate([
-                'name' => '',
-                'email' => ['unique:users'],
-                'password' => [''],
-                'image' => '',
-                'review' => '',
+                'name'      => '',
+                'email'     => ['unique:users'],
+                'password'  => [''],
+                'image'     => '',
+                'review'    => '',
             ]);
             $user->email = $data['email'];
         }
@@ -159,16 +174,16 @@ class UserController extends Controller
     public function showCheckoutForm(Product $product)
     {
         return view('product.checkout', [
-            'product' => $product,
-            'user' => auth()->guard()->user(),
+            'product'   => $product,
+            'user'      => auth()->guard()->user(),
         ]);
     }
 
     public function checkout()
     {
         $data = $this->validate([
-            'product_id' => 'required',
-            'exchange_type' => 'boolean',
+            'product_id'        => 'required',
+            'exchange_type'     => 'boolean',
         ]);
 
         $product = Product::find($data['product_id']);

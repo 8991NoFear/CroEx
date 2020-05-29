@@ -20,6 +20,7 @@ class CreateParnerUserTransactionsTable extends Migration
             $table->unsignedBigInteger('parner_user_id');
             $table->boolean('exchange_type');
             $table->unsignedInteger('exchange_point');
+            $table->unsignedInteger('discount');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

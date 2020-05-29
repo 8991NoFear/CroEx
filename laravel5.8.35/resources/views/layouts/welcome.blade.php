@@ -49,16 +49,44 @@
         </button>
         <div class="collapse navbar-collapse text-center justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav nav nav-pills list-group">
-                <li class="nav-item mr-3">
-                    <a class="nav-link" href="#">contact</a>
-                </li>
-                <li class="nav-item mr-3">
-                    <a class="nav-link" href="#">shoping</a>
+                @if (isset($user))
+
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="/fontawesome/svgs/regular/bell.svg" alt="" width="20">
+                        <!-- Counter - Messages -->
+                        <span class="badge badge-danger badge-counter">{{ count($user->notifications) }}</span>
+                    </a>
+                    <!-- Dropdown - Messages -->
+                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                        @forelse ($user->notifications as $notification)
+                        <div class="dropdown-item d-flex align-items-center">
+                            <div class="dropdown-list-image mr-3">
+                                <img class="rounded-circle" src="#" alt="img here">
+                                <div class="status-indicator bg-success"></div>
+                            </div>
+                            <div class="font-weight-bold">
+                                <div class="text-truncate">
+                                    @if ($notification->data['type'] == 0)
+                                    you have sent {{ $notification->data['point'] }} points to other!
+                                    @else
+                                    you have received {{ $notification->data['point'] }} points from other!
+                                    @endif
+                                </div>
+                                <div class="small text-gray-500">{{ $notification->created_at }}</div>
+                            </div>
+                        </div>
+                    @empty
+                        <h5 class="dropdown-header">
+                            No Message Available !!!
+                        </h5>
+                    @endforelse
+                    </div>
                 </li>
 
-                @if (Auth::guard('web')->check())
                 <li class="nav-item dropdown pl-3 border-left">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">
+                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/20x20">
                         {{ $user->name}}
                     </a>
                     <!-- Dropdown - User Information -->

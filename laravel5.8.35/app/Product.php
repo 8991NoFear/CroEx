@@ -17,4 +17,9 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, 'product_user_transactions');
     }
+
+    public function parner()
+    {
+        return $this->belongsTo(Parner::class);
+    }
 }
