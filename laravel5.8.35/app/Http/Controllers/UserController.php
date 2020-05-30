@@ -40,9 +40,6 @@ class UserController extends Controller
         // discount
         $discount = 0.05;
 
-        // notification message $ntfmsg
-        $ntfmsg = array();
-
         // validate data
         $data = $this->validate($request, [
             'type_exchange'     => ['required', 'boolean'],
@@ -60,43 +57,21 @@ class UserController extends Controller
             return redirect()->back()->with('msg', 'you have not registered with that parner!');
         }
 
-        $tran                   = new ParnerUserTransaction;
-        $tran->user_id          = $user->id;
-        $tran->parner_id        = $parner->id;
-        $tran->parner_user_id   = $parner_user->id;
-        $tran->exchange_type    = $data['type_exchange'];
-        $tran->exchange_point   = $data['exchange_point'];
-        $tran->discount         = $discount;
-
-        // TH1: croex ==> parner
-        if ($data['type_exchange'] == 0) {
-            if ($data['exchange_point'] > $user->point) {
-                return redirect()->back()->with('msg', 'your croex points is not enought!');
-            }
-
-            $user->point            -= $data['exchange_point'];
-            $parner_user->point     += $tran->exchange_point * (1- $tran->discount);
-
-            $ntfmsg['point']         = $data['exchange_point'];
-            $ntfmsg['type']          = 0;
-        }
-        // TH2: parner ==> croex
-        else {
-            if ($data['exchange_point'] > $parner_user->point) {
-                return redirect()->back()->with('msg', 'your ' . $parner->name . ' point is not enought!');
-            }
-
-            $user->point           += $tran->exchange_point * (1- $tran->discount);
-            $parner_user->point    -= $data['exchange_point'];
-
-            $ntfmsg['point']        = $tran->exchange_point * (1- $tran->discount);
-            $ntfmsg['type']         = 1;
+        // check if transaction is valid
+        if (
+            ($data['type_exchange'] == 0 ) &&
+            ($data['exchange_point'] > $user->point)
+        ) {
+            return redirect()->back()->with('msg', 'your croex points is not enought!');
+        } elseif (
+            ($data['type_exchange'] == 1 ) &&
+            ($data['exchange_point'] > $parner_user->point)
+        ) {
+            return redirect()->back()->with('msg', 'your ' . $parner->name . ' point is not enought!');
         }
 
-        // save in database
-        $tran->save();
-        $user->save();
-        DB::table($parner->name)->where('email', $user->email)->update(['point' => $parner_user->point]);
+        // do transaction
+        $ntfmsg = $this->exchangePointTransaction($data, $parner, $user, $parner_user, $discount);
 
         // dispath event
         ExchangePoint::dispatch($ntfmsg);
@@ -201,5 +176,46 @@ class UserController extends Controller
         }
 
         return view('thankyou');
+    }
+
+    public function exchangePointTransaction($data, $parner, $user, $parner_user, $discount)
+    {
+        // notification message
+        $ntfmsg;
+
+        // transaction
+        DB::transaction(function () use ($data, $parner, $user, $parner_user, $discount, &$ntfmsg) {
+            $tran                   = new ParnerUserTransaction;
+            $tran->user_id          = $user->id;
+            $tran->parner_id        = $parner->id;
+            $tran->parner_user_id   = $parner_user->id;
+            $tran->exchange_type    = $data['type_exchange'];
+            $tran->exchange_point   = $data['exchange_point'];
+            $tran->discount         = $discount;
+
+            // TH1: croex ==> parner
+            if ($data['type_exchange'] == 0) {
+                $user->point            -= $data['exchange_point'];
+                $parner_user->point     += $tran->exchange_point * (1- $tran->discount);
+
+                $ntfmsg['point']         = $data['exchange_point'];
+                $ntfmsg['type']          = 0;
+            }
+            // TH2: parner ==> croex
+            else {
+                $user->point           += $tran->exchange_point * (1- $tran->discount);
+                $parner_user->point    -= $data['exchange_point'];
+
+                $ntfmsg['point']        = $tran->exchange_point * (1- $tran->discount);
+                $ntfmsg['type']         = 1;
+            }
+
+            // save in database
+            $tran->save();
+            $user->save();
+            DB::table($parner->name)->where('email', $user->email)->update(['point' => $parner_user->point]);
+        });
+
+        return $ntfmsg;
     }
 }

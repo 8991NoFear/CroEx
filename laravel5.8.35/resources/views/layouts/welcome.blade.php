@@ -35,6 +35,25 @@
         a.nav-link:hover {
             background-color: #3490dc;
         }
+        .card,
+        .card-header,
+        .card-body,
+        .card-footer {
+            background: #fff;
+        }
+
+        .card-footer {
+            border-top: 1px dashed black;
+        }
+
+        .card-footer>h5 {
+            color: orange;
+        }
+
+        .card {
+            -webkit-box-shadow: 8px 12px 18px 4px rgba(99, 99, 99, 0.7);
+            box-shadow: 8px 12px 18px 4px rgba(99, 99, 99, 0.7);
+        }
     </style>
     @yield('custom-style')
 </head>

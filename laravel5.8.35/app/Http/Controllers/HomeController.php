@@ -19,7 +19,7 @@ class HomeController extends Controller
     {
         $user       = Auth::guard('web')->user();
         $parners    = Parner::all();
-        
+
         return view('welcome', [
             'user' => $user,
             'parners' => $parners,
@@ -28,10 +28,8 @@ class HomeController extends Controller
 
     public function showAllProducts()
     {
-        $categories = Category::all();
         $products = Product::all();
-        return view('product', [
-            'categories' => $categories,
+        return view('products.index', [
             'products' => $products,
         ]);
     }

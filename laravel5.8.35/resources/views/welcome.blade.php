@@ -94,7 +94,7 @@
 
         </div>
 
-        <a class="btn btn-primary mt-5" href="#">Explore Now</a>
+        <a class="btn btn-primary mt-5" href="{{ route('products') }}">Explore Now</a>
     </div>
 
 </section>

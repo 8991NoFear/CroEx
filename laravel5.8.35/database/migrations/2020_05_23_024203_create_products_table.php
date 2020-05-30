@@ -15,13 +15,16 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('parner_name');
+            $table->string('parner_name', 191);
             $table->string('name', 191)->unique();
             $table->text('description')->nullable();
+            $table->timestamp('expired');
             $table->unsignedInteger('price');
             $table->unsignedInteger('quantity');
-            $table->unsignedInteger('bonus_point')->default(0);
-            $table->string('image', 191)->nullable();
+            $table->unsignedInteger('bonus_point');
+            $table->string('image1', 191)->nullable();
+            $table->string('image2', 191)->nullable();
+            $table->string('image3', 191)->nullable();
             $table->timestamps();
 
             $table->foreign('parner_name')->references('name')->on('parners');
