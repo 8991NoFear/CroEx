@@ -8,9 +8,22 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    public function category()
+    protected $fillable = [
+        'parner_name',
+        'name',
+        'bonus_point',
+        'image1',
+        'image2',
+        'image3',
+        'price',
+        'quantity',
+        'description',
+        'expired',
+    ];
+
+    public function codes()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Code::class);
     }
 
     public function users()

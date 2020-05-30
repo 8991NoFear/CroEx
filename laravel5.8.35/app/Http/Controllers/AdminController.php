@@ -8,6 +8,8 @@ use App\Category;
 use Illuminate\Support\Facades\DB;
 
 use App\Parner;
+use App\Product;
+use App\Code;
 
 class AdminController extends Controller
 {
@@ -55,7 +57,7 @@ class AdminController extends Controller
     {
         $parners = Parner::all();
         return view('admins.product', [
-            'parners' => $parners
+            'parners' => $parners,
         ]);
     }
 
@@ -63,19 +65,31 @@ class AdminController extends Controller
     {
         $data = $this->validate($request, [
             'parner_name'   => 'required',
-            'name'          => 'required',
-            'image'         => 'required|image',
-            'description'   => '',
+            'name'          => 'required|unique:products',
+            'bonus_point'   => 'numeric',
+            'image1'        => 'required|image',
+            'image2'        => 'required|image',
+            'image3'        => 'required|image',
             'price'         => 'numeric',
             'quantity'      => 'numeric',
-            'bonus_point'   => 'numeric',
+            'description'   => 'required|string',
+            'expired'       => 'required|date'
         ]);
 
-        dd($data);
+        DB::transaction(function () use ($data) {
+            // upload image
+            $data['image1'] = $data['image1']->store('products', 'public');
+            $data['image2'] = $data['image2']->store('products', 'public');
+            $data['image3'] = $data['image3']->store('products', 'public');
 
-        Product::create($data);
+            // create product
+            $product = Product::create($data);
 
-        return redirect()->back->with('msg', 'create product successfully!');
+            // fake codes
+            factory(Code::class, (int) $data['quantity'])->create(['product_id' => $product->id]);
+        });
+
+        return redirect()->back()->with('msg', 'create product successfully!');
     }
 
     public function monthlyMonney()
@@ -87,12 +101,12 @@ class AdminController extends Controller
         $moneyFromDiscounting = [100, 200, 300, 400, 500, 600];
 
         // cong tong lai theo moi thang
-            return array_map(function ($a, $b) {
-                    return $a + $b;
-                },
-                $moneyFromSelling,
-                $moneyFromDiscounting
-            );
+        return array_map(function ($a, $b) {
+                return $a + $b;
+            },
+            $moneyFromSelling,
+            $moneyFromDiscounting
+        );
 
     }
 
