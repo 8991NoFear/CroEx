@@ -38,7 +38,7 @@ class AdminController extends Controller
 
         $orderToday = DB::select('select count(*) as total from product_user_transactions where date(created_at) = ?', $todayArrFormat)[0]->total;
 
-        $requestToday = DB::select('select count(*) as total from requests where date(created_at) = ?', $todayArrFormat)[0]->total;
+        $requestToday = DB::select('select count(*) as total from collaborate_requests where date(created_at) = ?', $todayArrFormat)[0]->total;
 
         // dd($moneyToday);
 

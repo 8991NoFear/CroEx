@@ -18,43 +18,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style media="screen">
-        html {
-            scroll-behavior: smooth;
-        }
-
-        footer {
-            background-color: #212529;
-        }
-
-        img.footer {
-            width: 50px;
-            height: 50px;
-        }
-
-        a.nav-link:hover {
-            background-color: #3490dc;
-        }
-        .card,
-        .card-header,
-        .card-body,
-        .card-footer {
-            background: #fff;
-        }
-
-        .card-footer {
-            border-top: 1px dashed black;
-        }
-
-        .card-footer>h5 {
-            color: orange;
-        }
-
-        .card {
-            -webkit-box-shadow: 8px 12px 18px 4px rgba(99, 99, 99, 0.7);
-            box-shadow: 8px 12px 18px 4px rgba(99, 99, 99, 0.7);
-        }
-    </style>
     @yield('custom-style')
 </head>
 
@@ -78,7 +41,7 @@
                     </a>
                     <!-- Dropdown - Messages -->
                     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                        @forelse ($user->notifications as $notification)
+                    @forelse ($user->notifications as $notification)
                         <div class="dropdown-item d-flex align-items-center">
                             <div class="dropdown-list-image mr-3">
                                 <img class="rounded-circle" src="#" alt="img here">
@@ -86,11 +49,15 @@
                             </div>
                             <div class="font-weight-bold">
                                 <div class="text-truncate">
-                                    @if ($notification->data['type'] == 0)
-                                    you have sent {{ $notification->data['point'] }} points to other!
-                                    @else
-                                    you have received {{ $notification->data['point'] }} points from other!
-                                    @endif
+                                @if ($notification->data['type'] == 0)
+                                you have sent {{ $notification->data['point'] }} points to other!
+                                @elseif ($notification->data['type'] == 1)
+                                you have received {{ $notification->data['point'] }} points from other!
+                                @elseif ($notification->data['type'] == 2)
+                                you have received {{ $notification->data['point'] }} points because buying voucher using money!
+                                @elseif ($notification->data['type'] == 3)
+                                you have subtracted {{ $notification->data['point'] }} points because buying voucher using croex points!
+                                @endif
                                 </div>
                                 <div class="small text-gray-500">{{ $notification->created_at }}</div>
                             </div>

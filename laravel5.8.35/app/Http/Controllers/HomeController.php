@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Parner;
-use App\Category;
 use App\Product;
 
 class HomeController extends Controller
@@ -31,6 +30,13 @@ class HomeController extends Controller
         $products = Product::all();
         return view('products.index', [
             'products' => $products,
+        ]);
+    }
+
+    public function showCheckoutForm(Product $product)
+    {
+        return view('products.checkout', [
+            'product' => $product,
         ]);
     }
 }

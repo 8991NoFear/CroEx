@@ -10,6 +10,7 @@ use App\Notifications\ExchangePointNotification;
 
 class ExchangePointListener
 {
+    
     public function __construct()
     {
         //

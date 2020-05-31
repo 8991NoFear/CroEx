@@ -10,6 +10,9 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use App\Events\ExchangePoint;
 use App\Listeners\ExchangePointListener;
 
+use App\Events\Purchase;
+use App\Listeners\PurchaseListener;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -24,7 +27,11 @@ class EventServiceProvider extends ServiceProvider
 
         ExchangePoint::class => [
             ExchangePointListener::class,
-        ]
+        ],
+
+        Purchase::class => [
+            PurchaseListener::class,
+        ],
     ];
 
     /**

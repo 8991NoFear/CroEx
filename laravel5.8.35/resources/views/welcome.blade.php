@@ -6,6 +6,24 @@
 
 @section('custom-style')
     <link rel="stylesheet" href="css/welcome.css">
+    <style media="screen">
+        html {
+            scroll-behavior: smooth;
+        }
+
+        footer {
+            background-color: #212529;
+        }
+
+        img.footer {
+            width: 50px;
+            height: 50px;
+        }
+
+        a.nav-link:hover {
+            background-color: #3490dc;
+        }
+    </style>
 @endsection
 
 @section('main')

@@ -18,8 +18,8 @@ class CreateParnerUserTransactionsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('parner_id');
             $table->unsignedBigInteger('parner_user_id');
-            $table->boolean('exchange_type');
-            $table->unsignedInteger('exchange_point');
+            $table->unsignedInteger('type');
+            $table->unsignedInteger('point');
             $table->unsignedInteger('discount');
             $table->timestamps();
 

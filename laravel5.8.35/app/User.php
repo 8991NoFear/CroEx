@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Parner::class, 'parner_user_transactions');
     }
+
+    public function codes()
+    {
+        return $this->hasMany(Code::class);
+    }
 }

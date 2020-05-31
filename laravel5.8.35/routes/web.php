@@ -15,12 +15,10 @@ Route::get('/', 'HomeController@index')->name('home');
 
 // Auth::routes();
 
-// Route::get('/user', 'UserController@index')->name('user.dashboard');
-// Route::get('/user/edit', 'UserController@edit')->name('user.edit');
-
 Route::get('/products', 'HomeController@showAllProducts')->name('products');
-Route::get('/products/{product}', 'UserController@showCheckoutForm')->name('checkout');
+Route::get('/products/{product}', 'HomeController@showCheckoutForm')->name('checkout');
 Route::post('/products', 'UserController@checkout')->name('checkout.submit');
+
 
 Route::prefix('user')->group(function () {
     //
@@ -77,7 +75,7 @@ Route::prefix('admin')->group(function () {
     Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-    
+
     Route::get('product', 'AdminController@showCreateProductForm')->name('admin.product');
     Route::post('product', 'AdminController@createProduct')->name('admin.product.submit');
 

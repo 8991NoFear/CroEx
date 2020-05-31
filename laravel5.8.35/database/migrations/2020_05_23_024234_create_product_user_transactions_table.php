@@ -17,8 +17,8 @@ class CreateProductUserTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
-            $table->boolean('exchange_type');
-            $table->unsignedInteger('exchange_point');
+            $table->unsignedInteger('type');
+            $table->unsignedInteger('point');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

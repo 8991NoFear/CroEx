@@ -21,6 +21,20 @@
         -webkit-box-shadow: 6px 12px 12px 3px rgba(99, 99, 99, 0.7);
         box-shadow: 6px 8px 12px 3px rgba(99, 99, 99, 0.7);
     }
+
+    @media screen and (min-width: 768px) {
+        #output1 {
+            height: 196px;
+        }
+
+        #output2 {
+            height: 94px;
+        }
+
+        #output3 {
+            height: 94px;
+        }
+    }
 </style>
 @endsection
 

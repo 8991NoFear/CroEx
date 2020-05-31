@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryTable extends Migration
+class CreateCollaborateRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('collaborate_requests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 191)->unique();
-            $table->string('image', 191);
-            $table->text('description')->nullable();
+            $table->string('email', 191)->unique();
+            $table->string('avatar', 191)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('collaborate_requests');
     }
 }
