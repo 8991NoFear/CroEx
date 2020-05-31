@@ -1,4 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.user-dashboard')
+
+@section('custom-css')
+    <style media="screen">
+    .card {
+        -webkit-box-shadow: 6px 12px 12px 3px rgba(99, 99, 99, 0.7);
+        box-shadow: 6px 8px 12px 3px rgba(99, 99, 99, 0.7);
+    }
+    </style>
+@endsection
 
 @section('content')
 
@@ -7,7 +16,7 @@
         <div class="col-md-10">
                 <form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
                     @csrf
-                    <div class="card">
+                    <div class="card mt-4">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-sm-2 mx-auto">
@@ -83,12 +92,12 @@
                             </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
+                                    <a href="{{ route('home') }}" class="text-white btn btn-danger">
+                                        {{ __('Cancel') }}
+                                    </a>
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Update') }}
                                     </button>
-                                    <a href="/" class="text-white btn btn-danger">
-                                        {{ __('Cancel') }}
-                                    </a>
                                 </div>
                             </div>
                         </div>

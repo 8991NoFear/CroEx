@@ -7,7 +7,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <h1 class="h3 mb-0 text-gray-800">This Month At A Glance</h1>
     </div>
 
     <!-- Content Row -->
@@ -19,8 +19,8 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Today)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$ {{ $moneyToday ?? 0 }}</div>
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings By Selling Voucher </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$ {{ $productMoneyThisMonth }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -36,8 +36,8 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Exchange (Today)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$exchangeToday}}</div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings By Discouting </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$ {{ $discountMoneyThisMonth }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -54,9 +54,9 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Order (Today)</div>
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Buying Voucher Transactions</div>
                             <div class="row no-gutters align-items-center">
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $orderToday }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $numberOfVoucherTransactions }}</div>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -73,8 +73,8 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $requestToday }}</div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Exchanging Transactions</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $numberOfExchangingTransactions }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -145,7 +145,7 @@
 @section('custom-js')
 <script type="text/javascript" defer>
     var areaChartData = @php
-    echo json_encode($monthlyMonney);
+    echo json_encode($monthlyMoney);
     @endphp;
 
     var pieChartData = @php

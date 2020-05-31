@@ -1,11 +1,20 @@
-@extends('layouts.app')
+@extends('layouts.user-dashboard')
+
+@section('custom-css')
+    <style media="screen">
+    .card {
+        -webkit-box-shadow: 6px 12px 12px 3px rgba(99, 99, 99, 0.7);
+        box-shadow: 6px 8px 12px 3px rgba(99, 99, 99, 0.7);
+    }
+
+    </style>
+@endsection
 
 @section('content')
-{{-- {{ dd(get_defined_vars()) }} --}}
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-10">
+            <div class="card mt-4">
                 <form method="POST" action="{{ route('user.exchange.submit') }}">
                     @csrf
 
@@ -87,18 +96,21 @@
                             </div>
 
 
-                            <div class="form-group row mb-0 mt-3 justify-content-end">
-                                <a href="/" class="text-white btn btn-danger ml-3">
-                                    {{ __('Cancel') }}
-                                </a>
-                                <button type="submit" class="btn btn-primary ml-3">
-                                    {{ __('Submit') }}
-                                </button>
+                            <div class="form-group row mb-0 mt-3">
+                                <div class="col-sm-6 offset-3 pl-0">
+                                    <a href="{{ route('user.dashboard') }}" class="text-white btn btn-danger ml-3">
+                                        {{ __('Cancel') }}
+                                    </a>
+                                    <button type="submit" class="btn btn-primary ml-3">
+                                        {{ __('Submit') }}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

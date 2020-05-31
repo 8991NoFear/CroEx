@@ -18,6 +18,7 @@
         a.nav-link:hover {
             background-color: #3490dc;
         }
+
         .card,
         .card-header,
         .card-body,

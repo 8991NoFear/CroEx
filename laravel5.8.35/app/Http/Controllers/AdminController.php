@@ -23,33 +23,38 @@ class AdminController extends Controller
 
     public function index()
     {
+        // time
+        $day    = date('d');
+        $month  = date('m');
+        $year   = date('Y');
+        $date   = date('Y-m-d');
+
+        // tien thu duoc tu ban voucher thang nay
+        $productMoneyThisMonth              = $this->productMoneyAtMonth($month, $year);
+
+        // tien thu duoc tu chiet khau doi diem thang nay
+        $discountMoneyThisMonth             = $this->discountMoneyAtMonth($month, $year);
+
         // tien thu duoc hang thang
-        $monthlyMonney          = $this->monthlyMonney();
+        $monthlyMoney                       = $this->monthlyMoney();
 
         // ti le tien thang nay
-        $ratioThisMonthMoney    = $this->ratioThisMonthMoney();
+        $ratioThisMonthMoney                = $this->ratioThisMonthMoney($month, $year);
 
-        // ngay hom nay ban duoc bao nhieu tien???
-        $todayArrFormat = array(date('Y-m-d'));
-        $moneyToday = DB::select('select sum(products.price) as total from products, product_user_transactions where products.id = product_user_transactions.product_id and date(product_user_transactions.created_at) = ?', $todayArrFormat)[0]->total;
+        // so giao dich mua voucher thang nay
+        $numberOfVoucherTransactions        = $this->numberOfVoucherTransactions($month, $year);
 
-        // ngay hom nay co bao nhieu giao dich doi diem???
-        $exchangeToday = DB::select('select count(*) as total from parner_user_transactions where date(created_at) = ?', $todayArrFormat)[0]->total;
-
-        $orderToday = DB::select('select count(*) as total from product_user_transactions where date(created_at) = ?', $todayArrFormat)[0]->total;
-
-        $requestToday = DB::select('select count(*) as total from collaborate_requests where date(created_at) = ?', $todayArrFormat)[0]->total;
-
-        // dd($moneyToday);
+        // so giao dich doi diem thang nay
+        $numberOfExchangingTransactions     = $this->numberOfExchangingTransactions($month, $year);
 
         // gui data thong ke duoc ra dashboard
         return view('admins.admin', [
-            'monthlyMonney'         => $monthlyMonney,
-            'ratioThisMonthMoney'   => $ratioThisMonthMoney,
-            'moneyToday'            => $moneyToday,
-            'exchangeToday'         => $exchangeToday,
-            'orderToday'            => $orderToday,
-            'requestToday'          => $requestToday,
+            'productMoneyThisMonth'             => $productMoneyThisMonth,
+            'discountMoneyThisMonth'            => $discountMoneyThisMonth,
+            'numberOfVoucherTransactions'       => $numberOfVoucherTransactions,
+            'numberOfExchangingTransactions'    => $numberOfExchangingTransactions,
+            'ratioThisMonthMoney'               => $ratioThisMonthMoney,
+            'monthlyMoney'                      => $monthlyMoney ,
         ]);
     }
 
@@ -92,7 +97,8 @@ class AdminController extends Controller
         return redirect()->back()->with('msg', 'create product successfully!');
     }
 
-    public function monthlyMonney()
+    // tien hang thang
+    public function monthlyMoney()
     {
         // thu tien tu ban san pham
         $moneyFromSelling = [100, 200, 300, 400, 500, 600];
@@ -110,8 +116,63 @@ class AdminController extends Controller
 
     }
 
-    public function ratioThisMonthMoney()
+    // tien thu duoc tu ban voucher thang nay
+    public function productMoneyAtMonth($month, $year)
     {
-        return [30, 70];
+        $money = DB::select('
+        SELECT sum(products.price) as total from products, product_user_transactions
+        WHERE products.id = product_user_transactions.product_id
+            AND month(product_user_transactions.created_at) = ?
+            AND year(product_user_transactions.created_at) = ?', [$month, $year])[0]->total;
+
+        return $money;
+    }
+
+    // tien thu duoc tu chiet khau doi diem thang nay
+    public function discountMoneyAtMonth($month, $year)
+    {
+        $money = DB::select('
+        SELECT sum(parner_user_transactions.discount) as total from users, parner_user_transactions
+        WHERE users.id = parner_user_transactions.user_id
+            AND month(parner_user_transactions.created_at) = ?
+            AND year(parner_user_transactions.created_at) = ?', [$month, $year])[0]->total;
+
+        return $money;
+    }
+
+    // so giao dich mua voucher thang nay
+    public function numberOfVoucherTransactions($month, $year)
+    {
+        $number = DB::select('
+        SELECT count(*) as total from products, product_user_transactions
+        WHERE products.id = product_user_transactions.product_id
+            AND month(product_user_transactions.created_at) = ?
+            AND year(product_user_transactions.created_at) = ?', [$month, $year])[0]->total;
+
+        return $number;
+    }
+
+    // so giao dich doi diem thang nay
+    public function numberOfExchangingTransactions($month, $year)
+    {
+        $number = DB::select('
+        SELECT count(*) as total from users, parner_user_transactions
+        WHERE users.id = parner_user_transactions.user_id
+            AND month(parner_user_transactions.created_at) = ?
+            AND year(parner_user_transactions.created_at) = ?', [$month, $year])[0]->total;
+
+        return $number;
+    }
+
+    // ty le
+    public function ratioThisMonthMoney($month, $year)
+    {
+        $productMoney           = $this->productMoneyAtMonth($month, $year);
+        $discountMoney          = $this->discountMoneyAtMonth($month, $year);
+
+        $productPercentage      = floor(($productMoney / ($productMoney + $discountMoney) * 100));
+        $discountPercentage     = 100 - $productPercentage;
+
+        return [$productPercentage, $discountPercentage];
     }
 }

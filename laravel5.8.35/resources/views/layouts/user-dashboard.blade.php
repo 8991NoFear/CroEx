@@ -9,13 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>User - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset("css/admin.min.css") }}" rel="stylesheet" type="text/css">
     <link href="{{ asset("css/all.css") }}" rel="stylesheet" type="text/css">
-
-    <script src="{{ asset('js/app.js') }}" ></script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Custom styles for this template-->
     @yield('custom-css')
 </head>
@@ -29,8 +29,9 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <h2 class="sidebar-brand d-flex align-items-center justify-content-center">
-                Administrator
+            <h2 class="sidebar-brand d-flex align-items-center justify-content-start">
+                <img width="50" height="50" src="/storage/{{ $user->avatar }}" class="mw-100 rounded-circle" alt="image go here">
+                <p class="mt-3 ml-3">{{ $user->name }}</p>
             </h2>
 
             <!-- Divider -->
@@ -38,23 +39,27 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('admin.dashboard') }}">
-                    <span>Dashboard</span>
+                <a class="nav-link" href="{{ route('home') }}">
+                    <span>Home Page</span>
                 </a>
             </li>
 
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item">
-                <a href="{{ route('admin.product') }}" class="nav-link"><span>create products</span></a>
+                <a href="{{ route('user.dashboard') }}" class="nav-link"><span>Profile</span></a>
             </li>
 
             <li class="nav-item">
-                <a href="" class="nav-link"><span>pending requested order</span></a>
+                <a href="{{ route('bag') }}" class="nav-link"><span>My Bag</span></a>
             </li>
 
             <li class="nav-item">
-                <a href="" class="nav-link"><span>historic order</span></a>
+                <a href="{{ route('user.exchange') }}" class="nav-link"><span>Exchange Points</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a href="" class="nav-link"><span>Notifications</span></a>
             </li>
 
             <!-- Divider -->
@@ -75,13 +80,14 @@
                         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="{{route('admin.logout')}}">
+                            <a class="btn btn-primary" href="{{route('logout')}}">
                                 Logout
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -99,11 +105,8 @@
         <!-- End of Content Wrapper -->
     </div>
 
-</body>
 
-<script src="{{ asset('js/Chart.min.js') }}" ></script>
-<script src="{{ asset('js/chart-area-demo.js') }}" ></script>
-<script src="{{ asset('js/chart-pie-demo.js') }}" ></script>
+</body>
 
 @yield('custom-js')
 

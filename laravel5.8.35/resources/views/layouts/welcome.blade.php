@@ -18,6 +18,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style media="screen">
+    .dropdown-menu {
+        max-height: 555px;
+        overflow-y: auto;
+    }
+    </style>
     @yield('custom-style')
 </head>
 
@@ -43,8 +49,53 @@
                     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                     @forelse ($user->notifications as $notification)
                         <div class="dropdown-item d-flex align-items-center">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="#" alt="img here">
+                            @if ($notification->data['type'] == 0)
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="" src="/images/exchange.png" alt="img here">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">
+                                        you have sent {{ $notification->data['point'] }} points because of exchanging
+                                        <div class="small text-gray-500">{{ $notification->created_at }}</div>
+                                    </div>
+                                </div>
+                            @elseif ($notification->data['type'] == 1)
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="" src="/images/exchange.png" alt="img here">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">
+                                        you have received {{ $notification->data['point'] }} points because of exchanging
+                                    </div>
+                                    <div class="small text-gray-500">{{ $notification->created_at }}</div>
+                                </div>
+                            @elseif ($notification->data['type'] == 2)
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="" src="/images/up.png" alt="img here">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">
+                                        you have received {{ $notification->data['point'] }} points because buy voucher using money
+                                    </div>
+                                    <div class="small text-gray-500">{{ $notification->created_at }}</div>
+                                </div>
+                            @elseif ($notification->data['type'] == 3)
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="" src="/images/down.png" alt="img here">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">
+                                        you have subtracted {{ $notification->data['point'] }} points because buy voucher using croex points!
+                                    </div>
+                                    <div class="small text-gray-500">{{ $notification->created_at }}</div>
+                                </div>
+                            @endif
+                            {{-- <div class="dropdown-list-image mr-3">
+                                <img class="rounded-circle" src="/images/send.png" alt="img here">
                                 <div class="status-indicator bg-success"></div>
                             </div>
                             <div class="font-weight-bold">
@@ -60,7 +111,7 @@
                                 @endif
                                 </div>
                                 <div class="small text-gray-500">{{ $notification->created_at }}</div>
-                            </div>
+                            </div> --}}
                         </div>
                     @empty
                         <h5 class="dropdown-header">
@@ -72,16 +123,16 @@
 
                 <li class="nav-item dropdown pl-3 border-left">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">
-                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/20x20">
+                        <img width="25" height="25" class="mw-100 rounded-circle" alt="card image" src="/storage/{{ $user->avatar ?? '/users/amy.jpg' }}" id="output" />
                         {{ $user->name}}
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow">
-                        <a class="dropdown-item" href="{{ route('user.edit')}}">
+                        <a class="dropdown-item" href="{{ route('user.dashboard')}}">
                             Profile
                         </a>
-                        <a class="dropdown-item" href="#">
-                            Activity Log
+                        <a class="dropdown-item" href="{{ route('bag') }}">
+                            My Bag
                         </a>
                         <a class="dropdown-item" href="{{ route('user.exchange') }}">
                             Exchange Point

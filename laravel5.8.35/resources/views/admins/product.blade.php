@@ -77,20 +77,20 @@
                             <div id="img-body" class="row mx-auto">
                                 <div class="col-sm-8 p-0 m-0 border">
                                     <label for="file-input-1" class="m-0 p-0">
-                                        <img style="cursor: pointer;" class="mw-100 h-100 rounded" alt="Card image" src="/storage/products/na.jpg" id="output1" />
+                                        <img style="cursor: pointer;" class="mw-100 rounded" alt="Card image" src="/storage/products/na.jpg" id="output1" />
                                     </label>
                                     <input id="file-input-1" name="image1" type="file" style="display: none" onchange="loadFile1(event)" />
                                 </div>
                                 <div class="col-sm-4 p-0 pl-2 m-0">
                                     <div class="row mb-2 m-0 border">
                                         <label for="file-input-2" class="m-0 p-0">
-                                            <img style="cursor: pointer;" class="mw-100 h-100 rounded" alt="Card image" src="/storage/products/na.jpg" id="output2" />
+                                            <img style="cursor: pointer;" class="mw-100 rounded" alt="Card image" src="/storage/products/na.jpg" id="output2" />
                                         </label>
                                         <input id="file-input-2" name="image2" type="file" style="display: none" onchange="loadFile2(event)"/>
                                     </div>
                                     <div class="row m-0 border">
                                         <label for="file-input-3" class="m-0 p-0">
-                                            <img style="cursor: pointer;" class="mw-100 h-100 rounded" alt="Card image" src="/storage/products/na.jpg" id="output3" />
+                                            <img style="cursor: pointer;" class="mw-100 rounded" alt="Card image" src="/storage/products/na.jpg" id="output3" />
                                         </label>
                                         <input id="file-input-3" name="image3" type="file" style="display: none" onchange="loadFile3(event)"/>
                                     </div>

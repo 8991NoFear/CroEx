@@ -27,9 +27,12 @@ class HomeController extends Controller
 
     public function showAllProducts()
     {
-        $products = Product::all();
+        $products   = Product::all();
+        $user       = Auth::guard('web')->user();
+
         return view('products.index', [
             'products' => $products,
+                'user' => $user,
         ]);
     }
 

@@ -29,12 +29,35 @@ class UserController extends Controller
         return redirect()->route('home');
     }
 
+    public function dashboard()
+    {
+        $user = auth()->guard('web')->user();
+
+        return view('users.dashboard', [
+            'user' => $user,
+        ]);
+    }
+
+    public function showBag()
+    {
+        $user = auth()->guard('web')->user();
+        $codes = $user->codes;
+
+        return view('users.bag', [
+            'user'  => $user,
+            'codes' => $codes,
+        ]);
+    }
+
 
     public function showExchangeForm()
     {
         $parners = Parner::all();
+        $user = auth()->guard('web')->user();
+
         return view('users.exchange', [
             'parners' => $parners,
+            'user' => $user,
         ]);
     }
 
@@ -220,9 +243,9 @@ class UserController extends Controller
             $tran->parner_user_id   = $parner_user->id;
             $tran->type             = $data['type'];
             $tran->point            = $data['point'];
-            $tran->discount         = $discount;
 
-            $change                 = floor($tran->point * (1- $tran->discount));
+            $change                 = floor($tran->point * (1 - $discount));
+            $tran->discount         = $tran->point - $change;
 
             // TH1: croex ==> parner
             if ($data['type'] == 0) {

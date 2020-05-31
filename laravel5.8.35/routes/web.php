@@ -26,7 +26,8 @@ Route::prefix('user')->group(function () {
     Route::post('edit', 'UserController@update')->name('user.update');
     Route::get('exchange', 'UserController@showExchangeForm')->name('user.exchange');
     Route::post('exchange', 'UserController@submitExchange')->name('user.exchange.submit');
-    Route::get('/', 'UserController@index')->name('user.dashboard');
+    Route::get('/dashboard', 'UserController@dashboard')->name('user.dashboard');
+    Route::get('/bag', 'UserController@showBag')->name('bag');
 
     // Authentication Routes...
     Route::get('login', [
