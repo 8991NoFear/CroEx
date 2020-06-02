@@ -125,7 +125,7 @@ class AdminController extends Controller
             AND month(product_user_transactions.created_at) = ?
             AND year(product_user_transactions.created_at) = ?', [$month, $year])[0]->total;
 
-        return $money;
+        return $money ?? 0;
     }
 
     // tien thu duoc tu chiet khau doi diem thang nay
@@ -137,7 +137,7 @@ class AdminController extends Controller
             AND month(parner_user_transactions.created_at) = ?
             AND year(parner_user_transactions.created_at) = ?', [$month, $year])[0]->total;
 
-        return $money;
+        return $money ?? 0;
     }
 
     // so giao dich mua voucher thang nay
@@ -170,8 +170,13 @@ class AdminController extends Controller
         $productMoney           = $this->productMoneyAtMonth($month, $year);
         $discountMoney          = $this->discountMoneyAtMonth($month, $year);
 
-        $productPercentage      = floor(($productMoney / ($productMoney + $discountMoney) * 100));
-        $discountPercentage     = 100 - $productPercentage;
+        if (!empty($productMoney) || !empty($discountMoney)) {
+            $productPercentage      = floor(($productMoney / ($productMoney + $discountMoney) * 100));
+            $discountPercentage     = 100 - $productPercentage;
+        } else {
+            $productPercentage = 0;
+            $discountPercentage = 0;
+        }
 
         return [$productPercentage, $discountPercentage];
     }
