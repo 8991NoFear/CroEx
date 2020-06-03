@@ -30,7 +30,7 @@
 
             <!-- Sidebar - Brand -->
             <h2 class="sidebar-brand d-flex align-items-center justify-content-start">
-                <img width="50" height="50" src="/storage/{{ $user->avatar }}" class="mw-100 rounded-circle" alt="image go here">
+                <img width="50" height="50" src="/storage/{{ $user->avatar ?? "/users/na.png"}}" class="mw-100 rounded-circle" alt="image go here">
                 <p class="mt-3 ml-3">{{ $user->name }}</p>
             </h2>
 

@@ -94,24 +94,6 @@
                                     <div class="small text-gray-500">{{ $notification->created_at }}</div>
                                 </div>
                             @endif
-                            {{-- <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="/images/send.png" alt="img here">
-                                <div class="status-indicator bg-success"></div>
-                            </div>
-                            <div class="font-weight-bold">
-                                <div class="text-truncate">
-                                @if ($notification->data['type'] == 0)
-                                you have sent {{ $notification->data['point'] }} points to other!
-                                @elseif ($notification->data['type'] == 1)
-                                you have received {{ $notification->data['point'] }} points from other!
-                                @elseif ($notification->data['type'] == 2)
-                                you have received {{ $notification->data['point'] }} points because buying voucher using money!
-                                @elseif ($notification->data['type'] == 3)
-                                you have subtracted {{ $notification->data['point'] }} points because buying voucher using croex points!
-                                @endif
-                                </div>
-                                <div class="small text-gray-500">{{ $notification->created_at }}</div>
-                            </div> --}}
                         </div>
                     @empty
                         <h5 class="dropdown-header">
@@ -123,7 +105,7 @@
 
                 <li class="nav-item dropdown pl-3 border-left">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">
-                        <img width="25" height="25" class="mw-100 rounded-circle" alt="card image" src="/storage/{{ $user->avatar ?? '/users/amy.jpg' }}" id="output" />
+                        <img width="25" height="25" class="mw-100 rounded-circle" alt="card image" src="/storage/{{ $user->avatar ?? '/users/na.png' }}" id="output" />
                         {{ $user->name}}
                     </a>
                     <!-- Dropdown - User Information -->

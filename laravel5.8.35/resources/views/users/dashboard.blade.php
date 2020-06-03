@@ -22,7 +22,7 @@
                                 <div class="col-sm-2 mx-auto">
                                     <div class="image-upload">
                                         <label for="file-input">
-                                            <img style="cursor: pointer;" class="card-img-top rounded-circle" alt="Card image" src="/storage/{{ $user->avatar ?? '/users/amy.jpg' }}" id="output" />
+                                            <img style="cursor: pointer;" class="card-img-top rounded-circle" alt="Card image" src="/storage/{{ $user->avatar ?? '/users/na.png' }}" id="output" />
                                         </label>
                                         <input id="file-input" name="image" type="file" style="display: none" onchange="loadFile(event)" />
                                     </div>

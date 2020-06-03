@@ -24,15 +24,15 @@
 
     @media screen and (min-width: 768px) {
         #output1 {
-            height: 196px;
+            height: 300px;
         }
 
         #output2 {
-            height: 94px;
+            height: 146px;
         }
 
         #output3 {
-            height: 94px;
+            height: 146px;
         }
     }
 </style>
