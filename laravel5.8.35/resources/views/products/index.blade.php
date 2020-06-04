@@ -71,9 +71,15 @@
     <div class="text-center mb-5">
         <h2 class="text-center">Our Coupons</h2>
         <h5 class="text-center">Check other default demos, which pretty much show some features available</h5>
+
+        <!-- Search form -->
+        <!-- Search form -->
+        <form class="md-form mt-0 col-md-6 offset-3">
+            <input class="form-control" type="text" placeholder="Search Vouchers" aria-label="Search" name="search" onkeyup="liveSearch()" id="search">
+        </form>
     </div>
 
-    <div class="row mx-auto">
+    <div class="row mx-auto" id="results">
         @foreach ($products as $product)
             <div class="col-sm-4 mb-5">
                 <div class="card p-2">
@@ -111,3 +117,39 @@
 </div>
 
 @endsection
+
+<script type="text/javascript">
+
+function liveSearch(){
+    ajaxRequest = new XMLHttpRequest();
+    if (!ajaxRequest) {
+        alert("Request error!");
+    }
+    var myURL = "/products/search";
+    var search = document.getElementById("search").value;
+    myURL = myURL + "?search=" + search;
+    ajaxRequest.onreadystatechange = ajaxResponse;
+    ajaxRequest.open("GET", myURL, true);
+    ajaxRequest.send(null);
+
+}
+
+function ajaxResponse() {
+    if (ajaxRequest.readyState != 4) {
+        return ;
+    } else {
+        if (ajaxRequest.status == 200) {
+            displaySearchResults();
+        } else {
+            alert("Request failed: " + ajaxRequest.statusText);
+        }
+    }
+}
+
+function displaySearchResults() {
+    var div = document.getElementById("results");
+    div.innerHTML = '';
+    div.innerHTML = ajaxRequest.responseText;
+}
+
+</script>

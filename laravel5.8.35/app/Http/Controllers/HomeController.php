@@ -7,6 +7,8 @@ use Auth;
 use App\Parner;
 use App\Product;
 
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
     public function __construct()
@@ -33,6 +35,23 @@ class HomeController extends Controller
         return view('products.index', [
             'products'  => $products,
             'user'      => $user,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        // doesn't work i don't know why
+        // $products = DB::select('
+        //     SELECT * FROM products
+        //     WHERE name like "%?%"',
+        //     array($request->search)
+        // );
+
+        $products = Product::where('name', 'like', '%' . $request->search . '%')->get();
+
+        // dd($products);
+        return view('products.search', [
+            'products' => $products,
         ]);
     }
 

@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index')->name('home');
 // Auth::routes();
 
 Route::get('/products', 'HomeController@showAllProducts')->name('products');
+Route::get('/products/search', 'HomeController@search');
 Route::get('/products/{product}', 'HomeController@showCheckoutForm')->name('checkout');
 Route::post('/products', 'UserController@checkout')->name('checkout.submit');
 
