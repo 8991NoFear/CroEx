@@ -66,7 +66,7 @@
                 <div class="card p-2">
                     <div class="row">
                         <div id="left" class="col-sm-7">
-                            <div class="col-sm-7">
+                            <div class="col-sm">
                                 <div class="">
                                     <h5>Description</h5>
                                     <p>{{ $code->product->description }}</p>
@@ -109,6 +109,9 @@
                 </div>
             </div>
         @endforeach
+    </div>
+    <div class="row justify-content-center">
+        {{ $codes->links() }}
     </div>
 </div>
 

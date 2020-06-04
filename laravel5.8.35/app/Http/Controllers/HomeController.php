@@ -20,19 +20,19 @@ class HomeController extends Controller
         $parners    = Parner::all();
 
         return view('welcome', [
-            'user' => $user,
-            'parners' => $parners,
+            'user'      => $user,
+            'parners'   => $parners,
         ]);
     }
 
     public function showAllProducts()
     {
-        $products   = Product::all();
+        $products   = Product::paginate(1);
         $user       = Auth::guard('web')->user();
 
         return view('products.index', [
-            'products' => $products,
-                'user' => $user,
+            'products'  => $products,
+            'user'      => $user,
         ]);
     }
 

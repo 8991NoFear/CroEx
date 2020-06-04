@@ -15,6 +15,7 @@ use App\Product;
 use App\ProductUserTransaction;
 use App\Events\ExchangePoint;
 use App\Events\Purchase;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class UserController extends Controller
 {
@@ -38,10 +39,22 @@ class UserController extends Controller
         ]);
     }
 
-    public function showBag()
+    public function showBag(Request $request)
     {
-        $user = auth()->guard('web')->user();
-        $codes = $user->codes;
+        $user       = auth()->guard('web')->user();
+        $allCodes   = $user->codes;
+
+        // manual pagination
+        $total          = $allCodes->count();
+        $perPage        = 1;
+        $currentPage    = $request->page ?? 1;
+        $start          = ($currentPage * $perPage) - $perPage;
+        $slice          = $allCodes->slice($start, $perPage);
+
+        $codes          = new Paginator($slice, $total, $perPage, $currentPage, [
+                            'path'  => $request->url(),
+                            'query' => $request->query(),
+                        ]);
 
         return view('users.bag', [
             'user'  => $user,
