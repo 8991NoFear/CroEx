@@ -100,11 +100,16 @@ class AdminController extends Controller
     // tien hang thang
     public function monthlyMoney()
     {
-        // thu tien tu ban san pham
-        $moneyFromSelling = [100, 200, 300, 400, 500, 600];
+        $thisMonth  = date('m');
+        $thisYear   = date('Y');
 
-        // thu tien tu trao doi diem
-        $moneyFromDiscounting = [100, 200, 300, 400, 500, 600];
+        // thu tien tu ban san pham
+        for ($month=1; $month <= $thisMonth ; $month++) {
+            $moneyFromSelling[]     = $this->productMoneyAtMonth($month, $thisYear);
+            $moneyFromDiscounting[] = $this->discountMoneyAtMonth($month, $thisYear);
+        }
+
+        // dd($moneyFromDiscounting);
 
         // cong tong lai theo moi thang
         return array_map(function ($a, $b) {

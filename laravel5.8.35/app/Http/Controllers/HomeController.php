@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Parner;
 use App\Product;
+use App\User;
 
 use Illuminate\Support\Facades\DB;
 
@@ -20,10 +21,12 @@ class HomeController extends Controller
     {
         $user       = Auth::guard('web')->user();
         $parners    = Parner::all();
+        // $users      = User::where('review', '<>', 'null')->get();
 
         return view('welcome', [
             'user'      => $user,
             'parners'   => $parners,
+            // 'users'     => $users,
         ]);
     }
 

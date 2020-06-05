@@ -220,7 +220,7 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-sm-6 mx-auto">
-                                            <img class="card-img-top" src="<?php echo asset('storage/users/amy.jpg'); ?>" alt="Card image">
+                                            <img class="card-img-top" src="<?php echo asset('storage/users/daniel.jpg'); ?>" alt="Card image">
                                         </div>
                                     </div>
                                 </div>
@@ -236,7 +236,7 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-sm-6 mx-auto">
-                                            <img class="card-img-top" src="<?php echo asset('storage/users/amy.jpg'); ?>" alt="Card image">
+                                            <img class="card-img-top" src="<?php echo asset('storage/users/daniel.jpg'); ?>" alt="Card image">
                                         </div>
                                     </div>
                                 </div>
@@ -252,7 +252,7 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-sm-6 mx-auto">
-                                            <img class="card-img-top" src="<?php echo asset('storage/users/amy.jpg'); ?>" alt="Card image">
+                                            <img class="card-img-top" src="<?php echo asset('storage/users/daniel.jpg'); ?>" alt="Card image">
                                         </div>
                                     </div>
                                 </div>
