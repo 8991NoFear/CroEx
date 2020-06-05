@@ -29,7 +29,11 @@ class HomeController extends Controller
 
     public function showAllProducts()
     {
-        $products   = Product::orderBy('created_at', 'desc')->paginate(3);
+        $now = date("Y-m-d H:m:i");
+        $products   = Product::where('expired', '>=', $now)
+            ->where('quantity', '>', 0)
+            ->orderBy('created_at', 'desc')
+            ->paginate(3);
         $user       = Auth::guard('web')->user();
 
         return view('products.index', [
@@ -47,7 +51,12 @@ class HomeController extends Controller
         //     array($request->search)
         // );
 
-        $products = Product::where('name', 'like', '%' . $request->search . '%')->get();
+        $now = date("Y-m-d H:m:i");
+        $products = Product::where('expired', '>=', $now)
+            ->where('quantity', '>', 0)
+            ->where('name', 'like', '%' . $request->search . '%')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         // dd($products);
         return view('products.search', [
@@ -59,8 +68,11 @@ class HomeController extends Controller
     {
         // it doesn't work i dont't know why
         // $this->middleware('auth');
+
+        $user = auth()->user();
         return view('products.checkout', [
             'product' => $product,
+            'user'    => $user,
         ]);
     }
 }

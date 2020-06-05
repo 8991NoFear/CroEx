@@ -255,16 +255,22 @@ class UserController extends Controller
                 $ntfmsg['point']                        = $price;
             }
 
+            $product            = Product::find($code->product->id);
+            $product->quantity -= 1;
+
             $product_user_transaction->save();
             $code->save();
             $user->save();
+            $product->save();
 
             // dispatch
             Purchase::dispatch($ntfmsg);
 
         });
 
-        return redirect()->back()->with("success", "purchase successfully!!! Your coupon is in your bag now.");
+        return view('users.thankyou', [
+            'msg' => 'purchase successfully!!! Your coupon is in your bag now',
+        ]);
     }
 
     public function exchangePointTransaction($data, $parner, $user, $parner_user, $discount)

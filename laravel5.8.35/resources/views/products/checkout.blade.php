@@ -123,17 +123,28 @@
                         <div class="d-none">
                             <input type="number" name="product_id" value="{{ $product->id }}">
                         </div>
+
+                        <button type="submit" class="btn-block mt-3">Purchase Coupon</button>
                     </div>
 
                     <div class="tab-pane fade" id="menu2">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="switch1" name="type" value="2">
+                        <h6 class="mt-3 text-danger">
+                            @if ($user->point < $product->price)
+                                sorry, you have not enought points to do this transaction
+                            @endif
+                        </h6>
+                        <div class="custom-control custom-switch pl-3">
+                            <input type="checkbox" class="custom-control-input" id="switch1" name="type" value="2" @if ($user->point < $product->price)
+                                disabled
+                            @endif>
                             <label class="custom-control-label" for="switch1">use {{ $product->price }} croex points</label>
-                          </div>
+                        </div>
+                        <button type="submit" class="btn-block" @if ($user->point < $product->price)
+                            style="display: none"
+                        @endif>Purchase Coupon</button>
                     </div>
 
             </div>
-            <button type="submit">Purchase Coupon</button>
         </form>
 
         </section>
