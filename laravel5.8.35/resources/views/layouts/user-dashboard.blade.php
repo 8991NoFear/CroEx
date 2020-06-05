@@ -51,7 +51,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('bag') }}" class="nav-link"><span>My Bag</span></a>
+                <a href="{{ route('user.bag') }}" class="nav-link"><span>My Bag</span></a>
             </li>
 
             <li class="nav-item">

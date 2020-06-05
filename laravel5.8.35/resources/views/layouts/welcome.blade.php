@@ -113,7 +113,7 @@
                         <a class="dropdown-item" href="{{ route('user.dashboard')}}">
                             Profile
                         </a>
-                        <a class="dropdown-item" href="{{ route('bag') }}">
+                        <a class="dropdown-item" href="{{ route('user.bag') }}">
                             My Bag
                         </a>
                         <a class="dropdown-item" href="{{ route('user.exchange') }}">

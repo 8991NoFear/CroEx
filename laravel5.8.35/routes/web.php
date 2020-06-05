@@ -29,7 +29,7 @@ Route::prefix('user')->group(function () {
     Route::post('exchange', 'UserController@submitExchange')->name('user.exchange.submit');
     Route::get('/dashboard', 'UserController@dashboard')->name('user.dashboard');
     Route::get('/bag/search', 'UserController@search');
-    Route::get('/bag', 'UserController@showBag')->name('bag');
+    Route::get('/bag', 'UserController@showBag')->name('user.bag');
 
     // Authentication Routes...
     Route::get('login', [
