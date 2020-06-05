@@ -21,4 +21,9 @@ class Code extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function transaction()
+    {
+        return $this->belongsTo(ProductUserTransaction::class, 'id');
+    }
 }

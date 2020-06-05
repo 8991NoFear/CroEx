@@ -17,12 +17,14 @@ class CreateProductUserTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('code_id');
             $table->unsignedInteger('type');
             $table->unsignedInteger('point');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('code_id')->references('id')->on('codes');
         });
     }
 

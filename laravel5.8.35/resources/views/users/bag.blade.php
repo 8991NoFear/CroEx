@@ -68,14 +68,16 @@
             <div class="col-sm-12 mb-5">
                 <div class="card p-2">
                     <div class="row">
-                        <div id="left" class="col-sm-7">
-                            <div class="col-sm">
-                                <div class="">
-                                    <h5>Description</h5>
-                                    <p>{{ $code->product->description }}</p>
-                                </div>
-                                <div class="">
-
+                        <div id="left" class="col-sm-7 d-flex flex-column justify-content-between">
+                            <div class="">
+                                <h5>Description</h5>
+                                <p>{{ $code->product->description }}</p>
+                                <h5>Expiry Date</h5>
+                                <p>This coupon will be expired on {{ $code->product->expired }}</p>
+                            </div>
+                            <div>
+                                <div class="d-flex">
+                                    <small class="">* you have bought this coupon on {{ $code->buy_at }}</small>
                                 </div>
                             </div>
                         </div>

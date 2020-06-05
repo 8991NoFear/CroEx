@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function showAllProducts()
     {
-        $products   = Product::paginate(1);
+        $products   = Product::orderBy('created_at', 'desc')->paginate(3);
         $user       = Auth::guard('web')->user();
 
         return view('products.index', [

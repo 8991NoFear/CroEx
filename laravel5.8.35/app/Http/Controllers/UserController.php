@@ -46,7 +46,7 @@ class UserController extends Controller
 
         // manual pagination
         $total          = $allCodes->count();
-        $perPage        = 1;
+        $perPage        = 3;
         $currentPage    = $request->page ?? 1;
         $start          = ($currentPage * $perPage) - $perPage;
         $slice          = $allCodes->slice($start, $perPage);
@@ -233,9 +233,11 @@ class UserController extends Controller
             $product_user_transaction   = new ProductUserTransaction;
 
             $code->user_id = $user->id;
+            $code->buy_at  = date("Y-m-d h:i:s");
 
             $product_user_transaction->user_id          = $user->id;
             $product_user_transaction->product_id       = $code->product_id;
+            $product_user_transaction->code_id          = $code->id;
             $product_user_transaction->type             = $request->type;
 
             $bonus = $code->product->bonus_point;

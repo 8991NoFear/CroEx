@@ -51,6 +51,6 @@ class User extends Authenticatable
 
     public function codes()
     {
-        return $this->hasMany(Code::class);
+        return $this->hasMany(Code::class)->orderBy('buy_at', 'desc');
     }
 }
