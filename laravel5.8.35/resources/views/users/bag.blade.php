@@ -58,9 +58,12 @@
     <div class="text-center mb-5">
         <h2 class="text-center">Your Coupons</h2>
         <h5 class="text-center">Check other default demos, which pretty much show some features available</h5>
+
+        <!-- Search form -->
+        <input class="form-control col-sm-6 offset-3" type="text" placeholder="Search Vouchers" aria-label="Search" onkeyup="liveSearch('/user/bag/search')" id="search">
     </div>
 
-    <div class="row mx-auto">
+    <div class="row mx-auto" id="defaultResults">
         @foreach ($codes as $code)
             <div class="col-sm-12 mb-5">
                 <div class="card p-2">
@@ -110,9 +113,16 @@
             </div>
         @endforeach
     </div>
-    <div class="row justify-content-center">
+
+    <div class="" id="ajaxResults">
+
+    </div>
+
+    <div class="row justify-content-center" id="links">
         {{ $codes->links() }}
     </div>
 </div>
 
 @endsection
+
+<script src="{{ asset('js/ajax.js') }}" ></script>

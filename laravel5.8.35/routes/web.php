@@ -15,8 +15,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 // Auth::routes();
 
-Route::get('/products', 'HomeController@showAllProducts')->name('products');
 Route::get('/products/search', 'HomeController@search');
+Route::get('/products', 'HomeController@showAllProducts')->name('products');
 Route::get('/products/{product}', 'HomeController@showCheckoutForm')->name('checkout');
 Route::post('/products', 'UserController@checkout')->name('checkout.submit');
 
@@ -28,6 +28,7 @@ Route::prefix('user')->group(function () {
     Route::get('exchange', 'UserController@showExchangeForm')->name('user.exchange');
     Route::post('exchange', 'UserController@submitExchange')->name('user.exchange.submit');
     Route::get('/dashboard', 'UserController@dashboard')->name('user.dashboard');
+    Route::get('/bag/search', 'UserController@search');
     Route::get('/bag', 'UserController@showBag')->name('bag');
 
     // Authentication Routes...

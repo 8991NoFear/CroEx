@@ -62,6 +62,28 @@ class UserController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $codes = auth()->user()->codes;
+
+        // get relation
+        foreach ($codes as $code) {
+            $code->product;
+        }
+
+        // search in product of code
+        $filtered = $codes->filter(function ($code) use ($request) {
+            $subject = $code->product->name;
+            $pattern =  '/' . $request->search . '/';
+
+            return preg_match($pattern, $subject);
+        });
+
+        return view('users.search', [
+            'codes' => $filtered,
+        ]);
+    }
+
 
     public function showExchangeForm()
     {
