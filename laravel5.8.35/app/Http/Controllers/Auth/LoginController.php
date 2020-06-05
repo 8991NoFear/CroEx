@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 // @author: ledinhbinh
 use Auth;
-//
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -43,6 +43,21 @@ class LoginController extends Controller
     public function userLogout()
     {
         Auth::guard()->logout();
+
         return redirect('/');
+    }
+
+    // override this method in order to redirect back to previous working after
+    // login
+    
+    public function showLoginForm()
+    {
+        // set intended to redirect back to previous working
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+
+        return view('auth.login');
     }
 }

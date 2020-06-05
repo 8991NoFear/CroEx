@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin-dashboard')
 
 @section('custom-css')
     <style media="screen">

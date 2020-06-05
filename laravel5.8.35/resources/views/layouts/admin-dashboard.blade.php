@@ -46,15 +46,7 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item">
-                <a href="{{ route('admin.product') }}" class="nav-link"><span>create products</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a href="" class="nav-link"><span>pending requested order</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a href="" class="nav-link"><span>historic order</span></a>
+                <a href="{{ route('admin.product') }}" class="nav-link"><span>Create products</span></a>
             </li>
 
             <!-- Divider -->

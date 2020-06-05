@@ -66,7 +66,7 @@ class UserController extends Controller
     {
         $codes = auth()->user()->codes;
 
-        // get relation
+        // get relationship properties
         foreach ($codes as $code) {
             $code->product;
         }

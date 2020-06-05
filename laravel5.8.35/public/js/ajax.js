@@ -1,5 +1,6 @@
 
 // equivalent to jquery ready() function
+// can be replace by using defer attribute on script tag
 
 document.addEventListener('DOMContentLoaded', function() {
     var ajaxResults     = document.getElementById("ajaxResults");

@@ -58,10 +58,6 @@
                 <a href="{{ route('user.exchange') }}" class="nav-link"><span>Exchange Points</span></a>
             </li>
 
-            <li class="nav-item">
-                <a href="" class="nav-link"><span>Notifications</span></a>
-            </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 

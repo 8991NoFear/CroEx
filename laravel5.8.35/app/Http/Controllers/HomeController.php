@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('auth')->only(['showCheckoutForm']);
     }
 
     public function index()
@@ -57,6 +57,8 @@ class HomeController extends Controller
 
     public function showCheckoutForm(Product $product)
     {
+        // it doesn't work i dont't know why
+        // $this->middleware('auth');
         return view('products.checkout', [
             'product' => $product,
         ]);

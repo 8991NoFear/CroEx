@@ -48,7 +48,7 @@ class AdminController extends Controller
         $numberOfExchangingTransactions     = $this->numberOfExchangingTransactions($month, $year);
 
         // gui data thong ke duoc ra dashboard
-        return view('admins.admin', [
+        return view('admins.dashboard', [
             'productMoneyThisMonth'             => $productMoneyThisMonth,
             'discountMoneyThisMonth'            => $discountMoneyThisMonth,
             'numberOfVoucherTransactions'       => $numberOfVoucherTransactions,
