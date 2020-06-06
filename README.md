@@ -34,8 +34,7 @@ web technologies and online services 20192 BKA
     DB_PORT=3306
     DB_DATABASE=croex
     DB_USERNAME=phpmyadmin
-    DB_PASSWORD=phpmyadmin
-    </pre>
+    DB_PASSWORD=phpmyadmin</pre>
 <li>Generate application key</li>
     <code>$ php artisan key:generate</code>
 <li>Detach container and config file permissions</li>
@@ -59,7 +58,7 @@ web technologies and online services 20192 BKA
 </ul>
 <p>By now, you can access project at localhost:8000</p>
 
-<h2>1.5 In the next times</h2>
+<h2>1.5. In the next times</h2>
   <ul>
     <li>wanna stop container</li>
       <code>$ docker stop croex</code>
