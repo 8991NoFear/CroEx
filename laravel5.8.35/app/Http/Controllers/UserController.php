@@ -257,6 +257,8 @@ class UserController extends Controller
 
             $product            = Product::find($code->product->id);
             $product->quantity -= 1;
+            // disable all timestamps field
+            $product->timestamps = false;
 
             $product_user_transaction->save();
             $code->save();
