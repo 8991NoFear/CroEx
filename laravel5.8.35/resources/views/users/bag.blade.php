@@ -97,10 +97,10 @@
                                     </div>
                                     <div class="col-sm-4 p-0 pl-2 m-0">
                                         <div class="row pb-2 m-0">
-                                            <img id="img2" class="mw-100 rounded" src="/storage/{{ $code->product->image1 }}" alt="img">
+                                            <img id="img2" class="mw-100 rounded" src="/storage/{{ $code->product->image2 }}" alt="img">
                                         </div>
                                         <div class="row m-0">
-                                            <img id="img3" class="mw-100 rounded" src="/storage/{{ $code->product->image1 }}" alt="img">
+                                            <img id="img3" class="mw-100 rounded" src="/storage/{{ $code->product->image3 }}" alt="img">
                                         </div>
                                     </div>
                                 </div>

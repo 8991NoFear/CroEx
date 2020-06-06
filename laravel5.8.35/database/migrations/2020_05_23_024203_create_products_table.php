@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('parner_name', 191);
             $table->string('name', 191)->unique();
             $table->text('description')->nullable();
-            $table->timestamp('expired');
+            $table->timestamp('expired')->nullable();
             $table->unsignedInteger('price');
             $table->unsignedInteger('quantity');
             $table->unsignedInteger('bonus_point');
