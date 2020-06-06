@@ -23,9 +23,19 @@ web technologies and online services 20192 BKA
     <br />
     <code>$ cd /var/www/html</code>
     <br />
+    <code>$ composer install</code>
+<li>Create and configure .env file</li>
     <code>$ cp .env.example .env</code>
     <br />
-    <code>$ composer install</code>
+    <span>Open .env file and set</span>
+    <pre>
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=croex
+    DB_USERNAME=phpmyadmin
+    DB_PASSWORD=phpmyadmin
+    </pre>
 <li>Generate application key</li>
     <code>$ php artisan key:generate</code>
 <li>Detach container and config file permissions</li>
@@ -37,9 +47,19 @@ web technologies and online services 20192 BKA
     <br />
     <code>$ sudo find CroEx -type d -exec chmod 777 {} \;</code>
   </ul>
-<p>By now, you can access croex at localhost:8000 and phpmyadmin at localhost:9000, the default username and passsword for logging in is phpmyadmin</p>
+<h2>1.4. migrate database</h2>
+<ul>
+    <li>First, access phpmyadmin at localhost:9000, the default username and passsword for logging in is phpmyadmin. Then create a database named croex</li>
+    <li>After that, attach to croex container and migrate database</li>
+    <code>$ docker attach croex</code>
+    <br />
+    <code>$ cd /var/www/html</code>
+    <br />
+    <code>$ php artisan migrate:fresh</code>
+</ul>
+<p>By now, you can access project at localhost:8000</p>
 
-<h2>1.4. In the next times</h2>
+<h2>1.5 In the next times</h2>
   <ul>
     <li>wanna stop container</li>
       <code>$ docker stop croex</code>
