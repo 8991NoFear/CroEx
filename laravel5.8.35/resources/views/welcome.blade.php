@@ -40,7 +40,7 @@
     </div>
 </section> --}}
 <!-- Header Ends -->
-<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="carouselExampleFade" class="carousel slide carousel-fade pt-5" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="https://utop.vn/uploads/2005263275.jpg" class="d-block w-100" alt="https://utop.vn/uploads/2005263275.jpg.">
@@ -95,7 +95,7 @@ In addition to the Gift Redemption, Affiliate shopping services with the largest
                         <h2>Bean Vermicelli</h2>
                     </div>
                     <div class="offer-behind" >
-                        <img src='https://images.foody.vn/res/g27/260842/prof/s576x330/foody-mobile-tom-jpg-152-636057527657849608.jpg' style="height: 255px; weight:255px;" >
+                        <img src='/storage/welcome/1.jpg' style="height: 255px; weight:255px;" >
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@ In addition to the Gift Redemption, Affiliate shopping services with the largest
                         <h2>Baked Rolls</h2>
                     </div>
                     <div class="offer-behind" >
-                        <img src='https://lh3.googleusercontent.com/proxy/4n4AlYboyUC221Qrs9y3Pdw-sqs8RkqS0RsnTFHi6w2pUMmpKnJgy5fUtfxsa2SATnTL-CIst3j9LSM6FIAi6eXa394h0EjE56AeRkPHR2V-zsH6KjbIVw' style="height: 255px; weight:220px;" >
+                        <img src='/storage/welcome/2.jpg' style="height: 255px; weight:220px;" >
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@ In addition to the Gift Redemption, Affiliate shopping services with the largest
                         <h2 class="">Noodle Soup</h2>
                     </div>
                     <div class="offer-behind" >
-                        <img src='https://images.foody.vn/res/g9/82841/prof/s576x330/foody-mobile-minh-anh-bun-mien-ngan-ha-noi-140715031907.jpg' style="height: 255px; weight:220px;" >
+                        <img src='/storage/welcome/3.jpg' style="height: 255px; weight:220px;" >
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@ In addition to the Gift Redemption, Affiliate shopping services with the largest
                         <h2 class="">Balut</h2>
                     </div>
                     <div class="offer-behind" >
-                      <img src='https://photo-2-baomoi.zadn.vn/w1000_r1/2019_03_09_20_29913979/2f67a72a106af934a07b.jpg' style="height: 255px; weight:220px;" >
+                      <img src='/storage/welcome/4.jpg' style="height: 255px; weight:220px;" >
                     </div>
                 </div>
             </div>

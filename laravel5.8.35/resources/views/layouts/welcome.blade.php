@@ -40,10 +40,10 @@
             <i>MENU</i>
           </button>
             <div class="dropdown-menu dropdown-menu-right">
-              <button class="dropdown-item" href="#about" type="button">About</button>
-              <button class="dropdown-item" href="#minishop" type="button">Mini Shop</button></button>
-              <button class="dropdown-item" href="#parner" type="button">Become Our Parner</button>
-              <button class="dropdown-item" href="" type="button">Contact</button>
+              <button class="dropdown-item" type="button"><a href="#">About</a></button>
+              <button class="dropdown-item" type="button"><a href="{{ route('products') }}">Mini Shop</a></button>
+              <button class="dropdown-item" type="button"><a href="{{ route('parner.create') }}">Become Our Parner</a></button>
+              <button class="dropdown-item" type="button"><a href="#">Contact</a></button>
             </div>
         </div>
         <div class="collapse navbar-collapse text-center justify-content-end" id="collapsibleNavbar">
