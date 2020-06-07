@@ -17,7 +17,7 @@
         }
 
         a.nav-link:hover {
-            background-color: #3490dc;
+            background-color: #482a9b9c;
         }
 
         .card,
@@ -103,7 +103,7 @@
                     </div>
                     <div class="card-footer p-0 pt-2 mt-1 mb-0 d-inline-flex justify-content-between align-items-center">
                         <h5 class="mb-0">$ {{ $product->price }}</h5>
-                        <a class="btn-sm btn-info" href="/products/{{ $product->id }}">Buy Now!</a>
+                        <a class="btn-sm btn-info" style="background-color: #02CCBA;" href="/products/{{ $product->id }}">Buy Now!</a>
                     </div>
                 </div>
             </div>

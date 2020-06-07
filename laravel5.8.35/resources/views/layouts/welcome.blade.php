@@ -31,10 +31,21 @@
 
     <!-- Navigation Bar Starts -->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand justify-content-start" href="/">CroEx</a>
+        <a class="navbar-brand justify-content-start" href="/"><b>CroEx</b></a>
         <button class="navbar-toggler my-3" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i>MENU</i>
+          </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <button class="dropdown-item" href="#about" type="button">About</button>
+              <button class="dropdown-item" href="#minishop" type="button">Mini Shop</button></button>
+              <button class="dropdown-item" href="#parner" type="button">Become Our Parner</button>
+              <button class="dropdown-item" href="" type="button">Contact</button>
+            </div>
+        </div>
         <div class="collapse navbar-collapse text-center justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav nav nav-pills list-group">
                 @if (isset($user))
@@ -127,7 +138,7 @@
                 </li>
                 @else
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('login')}}">login</a>
+                    <a class="nav-link" href="{{route('login')}}">LOGIN</a>
                 </li>
                 @endif
             </ul>
