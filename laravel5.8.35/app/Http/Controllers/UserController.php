@@ -19,6 +19,7 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class UserController extends Controller
 {
+    private $discount = 0.05;
 
     public function __construct()
     {
@@ -91,16 +92,14 @@ class UserController extends Controller
         $user = auth()->guard('web')->user();
 
         return view('users.exchange', [
-            'parners' => $parners,
-            'user' => $user,
+            'parners'   => $parners,
+            'user'      => $user,
+            'discount'  => $this->discount,
         ]);
     }
 
     public function submitExchange(Request $request)
     {
-        // discount
-        $discount = 0.05;
-
         // validate data
         $data = $this->validate($request, [
             'type'     => ['required', 'boolean'],
@@ -115,7 +114,7 @@ class UserController extends Controller
 
         if (empty($parner_user)) {
             // redirect back with error
-            return redirect()->back()->with('parner', 'you have not registered with that parner!');
+            return redirect()->back()->with('parner', 'you have not registered with that parner')->withInput();
         }
 
         // check if transaction is valid
@@ -123,16 +122,26 @@ class UserController extends Controller
             ($data['type']  == 0 ) &&
             ($data['point'] > $user->point)
         ) {
-            return redirect()->back()->with('point', 'your croex points is not enought!');
+            return redirect()->back()->with('point', 'your croex points is not enought!')->withInput();
+        } elseif (
+            ($data['type']  == 0 ) &&
+            (floor(floor($data['point'] * (1 - $this->discount)) / $parner->ratio) == 0)
+        ) {
+            return redirect()->back()->with('failure', 'you do not receive anything, think about it!!!')->withInput();;
+        } elseif (
+            ($data['type']  == 1 ) &&
+            (floor(floor($data['point'] * $parner->ratio)) * (1 - $this->discount) == 0)
+        ) {
+            return redirect()->back()->with('failure', 'you do not receive anything, think about it!!!')->withInput();;
         } elseif (
             ($data['type']  == 1 ) &&
             ($data['point'] > $parner_user->point)
         ) {
-            return redirect()->back()->with('point', 'your ' . $parner->name . ' point is not enought!');
+            return redirect()->back()->with('point', 'your ' . $parner->name . ' point is not enought!')->withInput();
         }
 
         // do transaction
-        $ntfmsg = $this->exchangePointTransaction($data, $parner, $user, $parner_user, $discount);
+        $ntfmsg = $this->exchangePointTransaction($data, $parner, $user, $parner_user);
 
         // dispath event
         ExchangePoint::dispatch($ntfmsg);
@@ -275,13 +284,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function exchangePointTransaction($data, $parner, $user, $parner_user, $discount)
+    public function exchangePointTransaction($data, $parner, $user, $parner_user)
     {
         // notification message
         $ntfmsg;
 
         // transaction
-        DB::transaction(function () use ($data, $parner, $user, $parner_user, $discount, &$ntfmsg) {
+        DB::transaction(function () use ($data, $parner, $user, $parner_user, &$ntfmsg) {
             $tran                   = new ParnerUserTransaction;
             $tran->user_id          = $user->id;
             $tran->parner_id        = $parner->id;
@@ -289,19 +298,25 @@ class UserController extends Controller
             $tran->type             = $data['type'];
             $tran->point            = $data['point'];
 
-            $change                 = floor($tran->point * (1 - $discount));
-            $tran->discount         = $tran->point - $change;
 
             // TH1: croex ==> parner
             if ($data['type'] == 0) {
-                $user->point            -= $data['point'];
-                $parner_user->point     += $change;
+                $baseChange     = floor($tran->point * (1 - $this->discount));
+                $change         = floor($baseChange / $parner->ratio);
+                $tran->discount = $tran->point - $baseChange;
 
-                $ntfmsg['point']         = $data['point'];
-                $ntfmsg['type']          = 0;
+                $user->point        -= $data['point'];
+                $parner_user->point += $change;
+
+                $ntfmsg['point']     = $data['point'];
+                $ntfmsg['type']      = 0;
             }
             // TH2: parner ==> croex
             else {
+                $baseChange     = floor($tran->point * $parner->ratio);
+                $change         = floor($baseChange * (1 - $this->discount));
+                $tran->discount = $baseChange - $change;
+
                 $user->point           += $change;
                 $parner_user->point    -= $data['point'];
 

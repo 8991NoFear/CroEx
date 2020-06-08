@@ -36,7 +36,7 @@ class HomeController extends Controller
         $products   = Product::where('expired', '>=', $now)
             ->where('quantity', '>', 0)
             ->orderBy('created_at', 'desc')
-            ->paginate(3);
+            ->paginate(6);
         $user       = Auth::guard('web')->user();
 
         return view('products.index', [

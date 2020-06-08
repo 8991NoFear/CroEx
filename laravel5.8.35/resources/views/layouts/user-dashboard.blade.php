@@ -55,7 +55,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('user.exchange') }}" class="nav-link"><span>Exchange Points</span></a>
+                <a href="{{ route('user.exchange') }}" class="nav-link"><span>Exchange</span></a>
             </li>
 
             <!-- Divider -->
