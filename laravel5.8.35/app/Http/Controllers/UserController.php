@@ -124,6 +124,16 @@ class UserController extends Controller
         ) {
             return redirect()->back()->with('point', 'your croex points is not enought!')->withInput();
         } elseif (
+            ($data['type']  == 0 ) &&
+            (floor(floor($data['point'] * (1 - $this->discount)) / $parner->ratio) == 0)
+        ) {
+            return redirect()->back()->with('failure', 'you do not receive anything, think about it!!!')->withInput();;
+        } elseif (
+            ($data['type']  == 1 ) &&
+            (floor(floor($data['point'] * $parner->ratio)) * (1 - $this->discount) == 0)
+        ) {
+            return redirect()->back()->with('failure', 'you do not receive anything, think about it!!!')->withInput();;
+        } elseif (
             ($data['type']  == 1 ) &&
             ($data['point'] > $parner_user->point)
         ) {

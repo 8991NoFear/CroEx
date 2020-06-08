@@ -37,6 +37,15 @@
                                         </div>
                                     </div>
                                 </div>
+                            @elseif (session()->has('failure'))
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="alert alert-danger alert-dismissible fade show mb-0">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>Failure!</strong> {{ session()->get('failure') }}.
+                                        </div>
+                                    </div>
+                                </div>
                             @endif
                         </div>
                         <div class="card-body">
@@ -63,7 +72,7 @@
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <select onchange="updateRatio(this);" class="custom-select m-0 @if (session()->has('parner')) is-invalid @endif" name="parner">
+                                    <select id="parners" onchange="updateRatio(this);" class="custom-select m-0 @if (session()->has('parner')) is-invalid @endif" name="parner">
 
                                         @foreach ($parners as $parner)
                                         <option value="{{ $parner->name }}" @if (old('parner') == $parner->name) selected @endif >{{ $parner->name }}</option>
@@ -153,15 +162,17 @@
         echo json_encode($parners);
     @endphp;
 
-    var ratio = @php
-        echo $parners->first()->ratio;
-    @endphp;
-
     var discount = @php
         echo $discount;
     @endphp;
 
-    var type = 0;
+    var type = @if (old('type'))
+        {{ old('type') }}
+    @else
+        {{ 0 }}
+    @endif;
+
+    var ratio = 0;
 
     var selectedParner = parners[0]['name'];
 
@@ -170,6 +181,8 @@
         var point           = document.getElementById('point');
         var ratioView       = document.getElementById('ratioView');
         var headratioView   = document.getElementById('headRatioView');
+
+        updateRatio(document.getElementById('parners'))
         updateReceive();
         updateDisplayRatio();
     }, false);
