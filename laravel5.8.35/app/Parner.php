@@ -17,7 +17,7 @@ class Parner extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'avatar', 'email'
+        'name', 'avatar', 'email', 'ratio'
     ];
 
     /**
