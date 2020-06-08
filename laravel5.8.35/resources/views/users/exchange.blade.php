@@ -10,7 +10,9 @@
 
     </style>
 
-
+@php
+    // dd(old());
+@endphp
 
 @endsection
 
@@ -45,11 +47,11 @@
                                 </div>
                                 <div class="col-sm-6 d-flex justify-content-between" id="type">
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input onclick="updateType(this)" type="radio" class="custom-control-input" id="customRadio" name="type" value="0" checked>
+                                        <input onclick="updateType(this)" type="radio" class="custom-control-input" id="customRadio" name="type" value="0" @if (empty(old('type')) || (old('type') == 0)) checked @endif>
                                         <label class="custom-control-label" for="customRadio">Croex => Parner</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input onclick="updateType(this)" type="radio" class="custom-control-input" id="customRadio2" name="type" value="1" >
+                                        <input onclick="updateType(this)" type="radio" class="custom-control-input" id="customRadio2" name="type" value="1" @if ((old('type') == 1)) checked @endif >
                                         <label class="custom-control-label" for="customRadio2">Parner => Croex</label>
                                     </div>
                                 </div>
@@ -64,7 +66,7 @@
                                     <select onchange="updateRatio(this);" class="custom-select m-0 @if (session()->has('parner')) is-invalid @endif" name="parner">
 
                                         @foreach ($parners as $parner)
-                                        <option value="{{ $parner->name }}">{{ $parner->name }}</option>
+                                        <option value="{{ $parner->name }}" @if (old('parner') == $parner->name) selected @endif >{{ $parner->name }}</option>
                                         @endforeach
 
                                     </select>
@@ -139,8 +141,6 @@
                             </div>
 
                         </div>
-
-
                 </form>
         </div>
     </div>
@@ -153,13 +153,17 @@
         echo json_encode($parners);
     @endphp;
 
-    var type = 0;
-
-    var selectedParner = parners[0]['name'];
-
     var ratio = @php
         echo $parners->first()->ratio;
     @endphp;
+
+    var discount = @php
+        echo $discount;
+    @endphp;
+
+    var type = 0;
+
+    var selectedParner = parners[0]['name'];
 
     document.addEventListener('DOMContentLoaded', function() {
         var receive         = document.getElementById('receive');
@@ -173,9 +177,9 @@
 
     function updateReceive() {
         if (type == 0) {
-            receive.innerHTML = '+' + Math.floor(Math.floor(point.value * 0.95) / ratio) + ' points';
+            receive.innerHTML = '+' + Math.floor(Math.floor(point.value * (1 - discount)) / ratio) + ' points';
         } else if (type == 1) {
-            receive.innerHTML = '+' + Math.floor(point.value * 0.95) * ratio + ' points';
+            receive.innerHTML = '+' + Math.floor(Math.floor(point.value * ratio) * (1 - discount))  + ' points';
         }
     }
 
