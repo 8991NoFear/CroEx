@@ -284,6 +284,37 @@ class UserController extends Controller
         ]);
     }
 
+    public function showBuyPointForm()
+    {
+        $user = auth()->guard('web')->user();
+
+        return view('users.buy-point', [
+            'user' => $user,
+        ]);
+    }
+
+    public function buyPoint(Request $request)
+    {
+        $this->validate($request, [
+            'point' => 'required|numeric',
+        ]);
+
+        $user = auth()->guard('web')->user();
+
+        DB::transaction(function () use ($user, $request) {
+            $user->point += $request->point;
+            $user->save();
+
+            $ntfmsg['point'] = $request->point;
+            $ntfmsg['type']  = 4;
+
+            // dispatch
+            Purchase::dispatch($ntfmsg);
+        });
+
+        return redirect()->back()->with('success', 'buy successfully');
+    }
+
     public function exchangePointTransaction($data, $parner, $user, $parner_user)
     {
         // notification message

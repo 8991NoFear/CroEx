@@ -93,6 +93,17 @@
                                     </div>
                                     <div class="small text-gray-500">{{ $notification->created_at }}</div>
                                 </div>
+                            @elseif ($notification->data['type'] == 4)
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="" src="/images/up.png" alt="img here">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">
+                                        you have receive {{ $notification->data['point'] }} points because of buying points
+                                    </div>
+                                    <div class="small text-gray-500">{{ $notification->created_at }}</div>
+                                </div>
                             @endif
                         </div>
                     @empty
@@ -117,7 +128,10 @@
                             My Bag
                         </a>
                         <a class="dropdown-item" href="{{ route('user.exchange') }}">
-                            Exchange Point
+                            Exchange Points
+                        </a>
+                        <a class="dropdown-item" href="{{ route('user.buy') }}">
+                            Buy Points
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

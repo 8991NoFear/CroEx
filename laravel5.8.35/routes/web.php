@@ -30,6 +30,8 @@ Route::prefix('user')->group(function () {
     Route::get('/dashboard', 'UserController@dashboard')->name('user.dashboard');
     Route::get('/bag/search', 'UserController@search');
     Route::get('/bag', 'UserController@showBag')->name('user.bag');
+    Route::get('/buy', 'UserController@showBuyPointForm')->name('user.buy');
+    Route::post('/buy', 'UserController@buyPoint')->name('user.buy.submit');
 
     // Authentication Routes...
     Route::get('login', [

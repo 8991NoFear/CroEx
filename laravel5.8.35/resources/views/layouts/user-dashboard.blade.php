@@ -58,6 +58,10 @@
                 <a href="{{ route('user.exchange') }}" class="nav-link"><span>Exchange</span></a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{ route('user.buy') }}" class="nav-link"><span>Buy Points</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
