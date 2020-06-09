@@ -21,17 +21,17 @@
             </div>
             <div class="row no-gutters">
                 <div class="col-sm-12 p-1">
-                    <img class="mw-100" id="image3" src="/storage/{{ $product->image2 }}" alt="img go here">
+                    <img class="mw-100" id="image3" src="/storage/{{ $product->image1 }}" alt="img go here">
 
                 </div>
 
                 <div class="col-sm-6 p-1">
-                    <img class="mw-100" id="image1" src="/storage/{{ $product->image1 }}" alt="img go here">
+                    <img class="mw-100" id="image1" src="/storage/{{ $product->image2 }}" alt="img go here">
 
 
                 </div>
                 <div class="col-sm-6 p-1">
-                    <img class="mw-100" id="image2" src="/storage/{{ $product->image2 }}" alt="img go here">
+                    <img class="mw-100" id="image2" src="/storage/{{ $product->image3 }}" alt="img go here">
 
                 </div>
             </div>
