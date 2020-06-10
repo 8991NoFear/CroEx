@@ -57,7 +57,7 @@
 <div class="jumbotron mb-0 pt-3">
     <div class="text-center mb-5">
         <h2 class="text-center">Your Coupons</h2>
-        <h5 class="text-center">Check other default demos, which pretty much show some features available</h5>
+        <h5 class="text-center">Dolore id non eu nulla laborum irure in dolor cillum amet fugiat ad.</h5>
 
         <!-- Search form -->
         <input class="form-control col-sm-6 offset-3" type="text" placeholder="Search Vouchers" aria-label="Search" onkeyup="liveSearch('/user/bag/search')" id="search">

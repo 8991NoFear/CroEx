@@ -63,7 +63,7 @@
 
                             <div class="col-md-6 input-group">
 
-                                <input id="ratio" type="number" class="form-control @error('ratio') is-invalid @enderror" name="ratio" value="{{ old('ratio') }}" autocomplete="ratio" autofocus min="1">
+                                <input id="ratio" type="number" class="form-control @error('ratio') is-invalid @enderror" name="ratio" value="{{ old('ratio') }}" autocomplete="ratio" autofocus min="0.01" step="0.01">
 
                                 @error('ratio')
                                 <span class="invalid-feedback" role="alert">

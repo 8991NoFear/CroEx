@@ -32,7 +32,7 @@
 <!-- Header Starts -->
 <section id="banner">
     <div class="container content-wrap text-center">
-        <h1 class="display-3 my-3">Lorem Ipsum</h1>
+        <h1 class="display-3 my-3">Cross-Exchange</h1>
         <h3 class="my-3">
             <em>Lorem ipsum dolor sit amet, consectetur adipisicing elit</em>
         </h3>
@@ -48,8 +48,7 @@
         <div class="row">
             <div class="col">
                 <h1 class="display-4 my-3">About CroEx</h2>
-                    <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book.</p>
+                    <p class="lead">Nisi ad exercitation eiusmod Lorem ad sint consequat ex duis in sit commodo reprehenderit mollit reprehenderit id. Tempor ad aute magna pariatur occaecat ex veniam deserunt proident labore amet ipsum nostrud et aute dolore. Incididunt elit deserunt exercitation ullamco nulla commodo Lorem laborum. Exercitation cillum ad ut quis officia cillum tempor sint sunt pariatur pariatur dolore ut proident. Occaecat magna quis incididunt occaecat ipsum pariatur eiusmod occaecat exercitation. Irure dolore ad excepteur minim tempor Lorem eu occaecat in sint nisi non eu aliqua in. Qui nisi sint aliquip fugiat consequat sunt Lorem dolore adipisicing. Culpa laboris qui cillum amet laboris tempor commodo aliqua dolor.</p>
             </div>
         </div>
     </div>
@@ -69,7 +68,7 @@
             <div class="col-md-3 col-sm-6 mb-3">
                 <div class="offer-box">
                     <div class="offer-front">
-                        <h3 class="">Lorem IpSum</h3>
+                        <h3 class="">Shopping</h3>
                     </div>
                     <div class="offer-behind">
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
@@ -80,7 +79,7 @@
             <div class="col-md-3 col-sm-6 mb-3">
                 <div class="offer-box">
                     <div class="offer-front">
-                        <h3 class="">Lorem IpSum</h3>
+                        <h3 class="">Entertain</h3>
                     </div>
                     <div class="offer-behind">
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
@@ -91,7 +90,7 @@
             <div class="col-md-3 col-sm-6 mb-3">
                 <div class="offer-box">
                     <div class="offer-front">
-                        <h3 class="">Lorem IpSum</h3>
+                        <h3 class="">Make Up</h3>
                     </div>
                     <div class="offer-behind">
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
@@ -102,7 +101,7 @@
             <div class="col-md-3 col-sm-6 mb-3">
                 <div class="offer-box">
                     <div class="offer-front">
-                        <h3 class="">Lorem IpSum</h3>
+                        <h3 class="">Cuisine</h3>
                     </div>
                     <div class="offer-behind">
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>

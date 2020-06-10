@@ -18,7 +18,7 @@ class CreateParnersTable extends Migration
             $table->string('name', 191)->unique();
             $table->string('email', 191)->unique();
             $table->string('avatar', 191);
-            $table->unsignedInteger('ratio');
+            $table->float('ratio');
             $table->timestamps();
         });
     }
