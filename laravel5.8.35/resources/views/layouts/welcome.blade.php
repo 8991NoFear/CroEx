@@ -40,9 +40,9 @@
             <i>MENU</i>
           </button>
             <div class="dropdown-menu dropdown-menu-right">
-              <button class="dropdown-item" href="#about" type="button">About</button>
-              <button class="dropdown-item" href="#minishop" type="button">Mini Shop</button></button>
-              <button class="dropdown-item" href="#parner" type="button">Become Our Parner</button>
+              <a class="dropdown-item" href="#about" type="button">About</a>
+              <a class="dropdown-item" href="#minishop" type="button">Mini Shop</a>
+              <a class="dropdown-item" href="#parner" type="button">Become Our Parner</a>
               <button class="dropdown-item" href="" type="button">Contact</button>
             </div>
         </div>
